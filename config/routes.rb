@@ -1,4 +1,7 @@
 Davidspattison::Application.routes.draw do
+  get "root/index"
+  root :to => "root#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
