@@ -1,2 +1,37 @@
-<h1>Root#index</h1>
-<p>Find me in app/views/root/index.html.erb</p>
+
+<ul class="tab-nav">
+	<li><%=link_to 'Welcome', '#'%></li>
+	<li><%=link_to 'About', '#about'%></li>
+	<li><%=link_to 'Blog', '#blog'%></li>
+	<li><%=link_to 'Links', '#links'%></li>
+	<li><%=link_to 'Resume', '#resume'%></li>
+</ul>
+<div class="tab">
+	
+	<div id="about" class="tab-item">
+		<h2>About Me</h2>
+	</div>
+	
+	<div id="blog" class="tab-item">
+		<h2>Blog</h2>
+		<p>Input XSS blog feed</p>
+	</div>
+	
+	<div id="resume" class="tab-item">
+		<h2>Resume</h2>
+		<p>@TODO</p>
+	</div>
+	
+	
+	<div id="links" class="tab-item">
+		<h2>Links</h2>
+		<p>@TODO</p>
+	</div>
+	
+	<div id="" class="tab-default">
+		<h2>Welcome</h2>
+	</div>
+	
+</div>
+
+

@@ -1,0 +1,31 @@
+.tab .tab-item:not(:target){ 
+	display:none;
+}
+.tab .tab-item:target{
+	display:block;
+}
+
+/**
+ * hide default tabs if a sybling is :target
+ * .tab-default must be the last one  
+ */
+.tab .tab-item:target ~ .tab-default {
+	display:none;
+}
+
+
+.tab-nav li{
+	display:inline-block;
+	border: 1px solid black;
+	border-bottom:none;
+	padding:5px;
+	margin:2px;
+	margin-bottom: 0px;
+}
+
+.tab-nav {
+	padding-left:10px;
+	border-bottom: 1px solid black;
+}
+
+
