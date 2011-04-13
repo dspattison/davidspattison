@@ -1,6 +1,6 @@
 
 <ul class="tab-nav">
-	<li><%=link_to 'Welcome', '#'%></li>
+	<li><%=link_to 'Welcome', '#welcome'%></li>
 	<li><%=link_to 'About', '#about'%></li>
 	<li><%=link_to 'Blog', '#blog'%></li>
 	<li><%=link_to 'Links', '#links'%></li>
@@ -8,6 +8,11 @@
 </ul>
 
 <div class="tab">
+	<div id="welcome" class="tab-item">
+		<h2>Welcome</h2>
+		<p>Thanks for visiting my site.</p>  
+		<p>My name is David Pattison.</p>
+	</div>
 	
 	<div id="about" class="tab-item">
 		<h2>About Me</h2>
@@ -29,12 +34,10 @@
 		<p>@TODO</p>
 	</div>
 	
-	<div id="" class="tab-default">
-		<h2>Welcome</h2>
-		<p>Thanks for visiting my site.</p>  
-		<p>My name is David Pattison.</p>
-	</div>
 	
 </div>
 
 
+<script type="text/javascript">
+	window.location = '#welcome';
+</script>

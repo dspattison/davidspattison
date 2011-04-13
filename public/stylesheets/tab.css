@@ -5,15 +5,6 @@
 	display:block;
 }
 
-/**
- * hide default tabs if a sybling is :target
- * .tab-default must be the last one  
- */
-.tab .tab-item:target ~ .tab-default {
-	display:none;
-}
-
-
 .tab-nav li{
 	display:inline-block;
 	border: 1px solid black;
