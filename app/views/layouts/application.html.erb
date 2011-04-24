@@ -7,9 +7,10 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<h1><%=link_to h('DavidSPattison.com'), '/'%></h1>
+<h1><%=link_to h('DavidSPattison.com'), root_index_url%></h1>
 
 <%= yield %>
 
+<%= render :partial=> 'shared/keel' %>
 </body>
 </html>
