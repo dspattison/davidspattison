@@ -25,12 +25,14 @@ namespace :deploy do
   task :default do
     update_code
     render_keel
+    migrate
     symlink
+    restart
   end
   
-  task :restart do
-    run "echo run this: sudo /etc/init.d/apache2 reload"
-  end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+     run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
+   end
 
   task :migrate do
     #disabled
