@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Body:</b>
+  <%= @spaste_paste.body %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @spaste_paste.title %>
+</p>
+
+<p>
+  <b>Key:</b>
+  <%= @spaste_paste.key %>
+</p>
+
+<p>
+  <b>Version:</b>
+  <%= @spaste_paste.version %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @spaste_paste.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_spaste_paste_path(@spaste_paste) %> |
+<%= link_to 'Back', spaste_pastes_path %>

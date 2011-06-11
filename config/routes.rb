@@ -1,4 +1,6 @@
 Davidspattison::Application.routes.draw do
+  namespace :spaste do resources :pastes end
+
   get "root/index"
   root :to => "root#index"
 

@@ -1,0 +1,31 @@
+<h1>Listing spaste_pastes</h1>
+
+<table>
+  <tr>
+    <th>Body</th>
+    <th>Title</th>
+    <th>Key</th>
+    <th>Version</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @spaste_pastes.each do |spaste_paste| %>
+  <tr>
+    <td><%= spaste_paste.body %></td>
+    <td><%= spaste_paste.title %></td>
+    <td><%= spaste_paste.key %></td>
+    <td><%= spaste_paste.version %></td>
+    <td><%= spaste_paste.status %></td>
+    <td><%= link_to 'Show', spaste_paste %></td>
+    <td><%= link_to 'Edit', edit_spaste_paste_path(spaste_paste) %></td>
+    <td><%= link_to 'Destroy', spaste_paste, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Paste', new_spaste_paste_path %>

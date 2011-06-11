@@ -1,0 +1,2 @@
+module Spaste::PastesHelper
+end
