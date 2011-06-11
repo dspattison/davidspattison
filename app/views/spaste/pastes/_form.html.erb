@@ -1,0 +1,37 @@
+<%= form_for(@spaste_paste) do |f| %>
+  <% if @spaste_paste.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@spaste_paste.errors.count, "error") %> prohibited this spaste_paste from being saved:</h2>
+
+      <ul>
+      <% @spaste_paste.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :key %><br />
+    <%= f.text_field :key %>
+  </div>
+  <div class="field">
+    <%= f.label :version %><br />
+    <%= f.text_field :version %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
