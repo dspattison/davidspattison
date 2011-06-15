@@ -15,11 +15,13 @@ ActiveRecord::Schema.define(:version => 20110611192426) do
   create_table "spaste_pastes", :force => true do |t|
     t.text     "body"
     t.string   "title"
-    t.string   "key"
+    t.string   "public_key"
     t.string   "version"
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "spaste_pastes", ["public_key"], :name => "index_spaste_pastes_on_public_key"
 
 end

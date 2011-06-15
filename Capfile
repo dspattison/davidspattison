@@ -23,6 +23,7 @@ namespace :deploy do
   
   task :default do
     update_code
+    link_sqlite_db
     render_keel
     migrate
     symlink
@@ -32,6 +33,10 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
      run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
    end
+   
+  task :link_sqlite_db, :roles => :app, :except => {:no_release => true} do
+    run "ln -sf #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
+  end
 
   task :migrate do
     #disabled

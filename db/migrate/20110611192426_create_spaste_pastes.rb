@@ -3,12 +3,13 @@ class CreateSpastePastes < ActiveRecord::Migration
     create_table :spaste_pastes do |t|
       t.text :body
       t.string :title
-      t.string :key
+      t.string :public_key
       t.string :version
       t.integer :status
 
       t.timestamps
     end
+    add_index :spaste_pastes, :public_key
   end
 
   def self.down

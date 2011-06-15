@@ -9,7 +9,7 @@ module Crypt
       end
       
       def new_key_set
-        k = Gibberish::RSA.generate_keypair(1024)
+        k = Gibberish::RSA.generate_keypair(256)
         return [k.public_key, k.private_key]
       end
       
