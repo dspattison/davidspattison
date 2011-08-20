@@ -12,8 +12,8 @@ set :repository, 'git@git.davidspattison.com:davidspattison.git'
 
 #set :deploy_via, :remote_cache #keep files locally and do an update
 
-role :web, 'ec2-50-16-139-242.compute-1.amazonaws.com'
-role :app, 'ec2-50-16-139-242.compute-1.amazonaws.com'
+role :web, 'ec2-72-44-35-251.compute-1.amazonaws.com'
+role :app, 'ec2-72-44-35-251.compute-1.amazonaws.com'
 
 ssh_options[:user] = "ubuntu"
 
