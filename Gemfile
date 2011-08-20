@@ -9,6 +9,8 @@ gem 'sqlite3'
 
 gem 'gibberish'
 
+gem 'redis', '2.2.2'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
