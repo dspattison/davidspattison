@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Target url</th>
-    <th>Code</th>
+	<th>Short</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,7 +12,7 @@
 <% @urlshorts.each do |urlshort| %>
   <tr>
     <td><%= urlshort.target_url %></td>
-    <td><%= urlshort.code %></td>
+	<td><span style="margin:5px;"><%= link_to(urlshort.get_short_url, urlshort.get_short_url)%></span></td>
     <td><%= link_to 'Show', urlshort %></td>
     <td><%= link_to 'Edit', edit_urlshort_path(urlshort) %></td>
     <td><%= link_to 'Destroy', urlshort, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -5,6 +5,11 @@ class Urlshort < ActiveRecord::Base
   
   validate :next_code
   
+  def get_short_url
+    "http://patt.us/u/#{code}"
+  end
+  
+  
   private
 
   def find_avaliable_code(length=1)

@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <b>Code:</b>
-  <%= @urlshort.code %>
+  <b>Short Link:</b>
+  <%= link_to(@urlshort.get_short_url, @urlshort.get_short_url)%>
 </p>
 
 
