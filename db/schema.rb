@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110611192426) do
+ActiveRecord::Schema.define(:version => 20111020040952) do
 
   create_table "spaste_pastes", :force => true do |t|
     t.text     "body"
@@ -23,5 +23,12 @@ ActiveRecord::Schema.define(:version => 20110611192426) do
   end
 
   add_index "spaste_pastes", ["public_key"], :name => "index_spaste_pastes_on_public_key"
+
+  create_table "urlshorts", :force => true do |t|
+    t.string   "target_url"
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

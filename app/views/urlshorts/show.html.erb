@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Target url:</b>
+  <%= @urlshort.target_url %>
+</p>
+
+<p>
+  <b>Code:</b>
+  <%= @urlshort.code %>
+</p>
+
+
+<%= link_to 'Edit', edit_urlshort_path(@urlshort) %> |
+<%= link_to 'Back', urlshorts_path %>
