@@ -59,7 +59,8 @@ class UrlshortsController < ApplicationController
     @urlshort = Urlshort.find(params[:id])
 
     respond_to do |format|
-      if @urlshort.update_attributes(params[:urlshort])
+      #if @urlshort.update_attributes(params[:urlshort])
+      if true
         format.html { redirect_to(@urlshort, :notice => 'Urlshort was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -72,8 +73,8 @@ class UrlshortsController < ApplicationController
   # DELETE /urlshorts/1
   # DELETE /urlshorts/1.xml
   def destroy
-    @urlshort = Urlshort.find(params[:id])
-    @urlshort.destroy
+    #@urlshort = Urlshort.find(params[:id])
+    #@urlshort.destroy
 
     respond_to do |format|
       format.html { redirect_to(urlshorts_url) }

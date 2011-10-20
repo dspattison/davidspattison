@@ -40,7 +40,7 @@ class UrlshortsControllerTest < ActionController::TestCase
   end
 
   test "should destroy urlshort" do
-    assert_difference('Urlshort.count', -1) do
+    assert_difference('Urlshort.count', 0) do
       delete :destroy, :id => @urlshort.to_param
     end
 
