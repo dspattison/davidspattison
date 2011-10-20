@@ -6,6 +6,7 @@ class CreateUrlshorts < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :urlshorts, :code, :unique=>true
   end
 
   def self.down

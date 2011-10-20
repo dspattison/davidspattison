@@ -31,4 +31,6 @@ ActiveRecord::Schema.define(:version => 20111020040952) do
     t.datetime "updated_at"
   end
 
+  add_index "urlshorts", ["code"], :name => "index_urlshorts_on_code", :unique => true
+
 end

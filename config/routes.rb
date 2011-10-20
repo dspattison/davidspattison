@@ -1,5 +1,7 @@
 Davidspattison::Application.routes.draw do
   resources :urlshorts
+  match "urlshorts/redirect/:code" => 'urlshorts#redirect'
+  match "u/:code" => 'urlshorts#redirect'
 
   namespace :spaste do resources :pastes end
 

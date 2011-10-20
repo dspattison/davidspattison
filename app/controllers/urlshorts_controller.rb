@@ -80,4 +80,13 @@ class UrlshortsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+  def redirect
+    @urlshort = Urlshort.find_by_code(params[:code])
+    respond_to do |format|
+      format.html { redirect_to(@urlshort.target_url) }
+      format.xml  { head :ok }
+    end
+  end
 end

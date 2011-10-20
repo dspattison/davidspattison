@@ -3,13 +3,12 @@
 one:
   body: MyText
   title: MyString
-  key: MyString
   version: MyString
   status: 1
 
-two:
-  body: MyText
-  title: MyString
-  key: MyString
-  version: MyString
-  status: 1
+#two:
+#  body: MyText
+#  title: MyString
+#  key: MyString
+#  version: MyString
+#  status: 1

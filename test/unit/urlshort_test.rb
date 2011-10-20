@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class UrlshortTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  
+  test "create lots" do
+    100.times do
+      x = Urlshort.new({:target_url=>34423})
+      assert x.save
+      puts x.code
+    end
   end
 end
