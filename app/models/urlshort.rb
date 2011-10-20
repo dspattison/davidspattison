@@ -18,7 +18,6 @@ class Urlshort < ActiveRecord::Base
       code += get_random_char
     end
     logger.info code
-    code = code.force_encoding('UTF-8')
     if Urlshort.find_by_code code
       return find_avaliable_code(length+1)
     end
