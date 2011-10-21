@@ -1,5 +1,9 @@
 <h1>New spaste_paste</h1>
 
+<% if !request.ssl? %>
+<p class="amber">I recommend you use SSL.</p>
+<% end %>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', spaste_pastes_path %>
