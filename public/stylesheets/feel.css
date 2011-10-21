@@ -1,0 +1,27 @@
+/* as in look and feel
+ * Won't find any position logic here
+ */
+
+.alert {
+	background: #ffebe8;
+	border: 1px solid #dd3c10
+}
+.warning {
+	background-color: #FFF9D7;
+	border: 1px solid #E2C822
+}
+.amber {
+	background-color: #FFBF00;
+	border: 1px solid #FF7E00
+}
+.normal {
+	background-color: white;
+	border: 1px solid white
+}
+.good {
+	background-color: #bbffb4;
+	border: 1px solid #93ca8e
+}
+p.alert, span.alert, p.warning, span.warning, p.amber, span.amber, p.normal, span.normal, p.good, span.good {
+	border-radius: 5px;
+}
