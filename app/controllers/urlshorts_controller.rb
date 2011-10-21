@@ -2,12 +2,8 @@ class UrlshortsController < ApplicationController
   # GET /urlshorts
   # GET /urlshorts.xml
   def index
-    @urlshorts = Urlshort.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @urlshorts }
-    end
+    @urlshort = Urlshort.new
+    render :action => 'new'
   end
 
   # GET /urlshorts/1

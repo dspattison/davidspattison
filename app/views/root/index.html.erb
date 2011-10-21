@@ -10,8 +10,18 @@
 <div class="tab">
 	<div id="welcome" class="tab-item">
 		<h2>Welcome</h2>
-		<p>Thanks for visiting my site.</p>  
-		<p>My name is David Pattison.</p>
+		<p>Thanks for visiting my site.</p>
+		<p>Here are some things I have built on this web scratchpad.</p>
+		<dl>
+			<dt><%= link_to "Url Shortner", urlshorts_path %></dt>
+			<dd>Classic 1 Table app</dd>
+			<dd>Had to do it with my new patt.us domain.</dd>
+			<dd>Since no one uses it (except you?) so the urls are really short.</dd>
+			
+			<dt><%= link_to "Secure Paste Bin", spaste_pastes_path %></dt>
+			<dd>Annoymous Text Blob storage/retrival</dd>
+			<dd>Fully encrypted storage using Public/Private Cryptogrphy</dd>
+		</dl>
 	</div>
 	
 	<div id="about" class="tab-item">
