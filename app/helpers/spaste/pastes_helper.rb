@@ -1,4 +1,4 @@
-require "#{RAILS_ROOT}/lib/crypt/gib/main"
+require "#{Rails.root}/lib/crypt/gib/main"
 
 module Spaste::PastesHelper
   
