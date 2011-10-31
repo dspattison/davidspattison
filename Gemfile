@@ -11,7 +11,7 @@ gem 'gibberish'
 
 gem 'redis', '2.2.2'
 
-gem 'prototype-rails', :git => 'git://github.com/rails/prototype-rails.git'
+gem 'prototype-rails', '3.1.0'
 
 # Use unicorn as the web server
 # gem 'unicorn'
