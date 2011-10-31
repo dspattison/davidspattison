@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'erb'
 load 'deploy'
 
 set :deploy_time, `date`.chomp!
@@ -43,6 +44,6 @@ namespace :deploy do
   end
   
   task :render_keel do 
-    run "echo '<center>Updated on #{deploy_time} by #{deploy_user}</center>' >> #{release_path}/app/views/shared/_keel.html.erb"
+    run "echo '<center>Updated on #{deploy_time} by #{deploy_user} #{`git describe --all`}</center> ' >> #{release_path}/app/views/shared/_keel.html.erb"
   end
 end
