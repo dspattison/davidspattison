@@ -25,3 +25,19 @@
 p.alert, span.alert, p.warning, span.warning, p.amber, span.amber, p.normal, span.normal, p.good, span.good {
 	border-radius: 5px;
 }
+
+
+/* Default styling of some elements */
+
+body{
+	color: #333;
+}
+
+a:hover{
+	background-color: #333;
+	color: #fff;
+}
+a {
+	color: #333;
+}
+
