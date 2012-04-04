@@ -1,0 +1,2 @@
+module Tte::TurnsHelper
+end

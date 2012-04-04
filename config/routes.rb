@@ -1,4 +1,8 @@
 Davidspattison::Application.routes.draw do
+  namespace :tte do resources :turns end
+
+  namespace :tte do resources :games end
+
   resources :urlshorts
   match "urlshorts/redirect/:code" => 'urlshorts#redirect'
   match "u/:code" => 'urlshorts#redirect'

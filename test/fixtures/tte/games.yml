@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  player_a_email: MyString
+  player_b_email: MyString
+
+two:
+  player_a_email: MyString
+  player_b_email: MyString

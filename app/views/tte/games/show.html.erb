@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Player a email:</b>
+  <%= @tte_game.player_a_email %>
+</p>
+
+<p>
+  <b>Player b email:</b>
+  <%= @tte_game.player_b_email %>
+</p>
+
+
+<%= link_to 'Edit', edit_tte_game_path(@tte_game) %> |
+<%= link_to 'Back', tte_games_path %>

@@ -1,0 +1,27 @@
+<h1>Listing tte_turns</h1>
+
+<table>
+  <tr>
+    <th>Game</th>
+    <th>Number</th>
+    <th>Board</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tte_turns.each do |tte_turn| %>
+  <tr>
+    <td><%= tte_turn.game_id %></td>
+    <td><%= tte_turn.number %></td>
+    <td><%= tte_turn.board %></td>
+    <td><%= link_to 'Show', tte_turn %></td>
+    <td><%= link_to 'Edit', edit_tte_turn_path(tte_turn) %></td>
+    <td><%= link_to 'Destroy', tte_turn, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Turn', new_tte_turn_path %>

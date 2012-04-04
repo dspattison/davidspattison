@@ -1,0 +1,2 @@
+module Tte::GamesHelper
+end

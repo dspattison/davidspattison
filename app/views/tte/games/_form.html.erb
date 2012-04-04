@@ -1,0 +1,25 @@
+<%= form_for(@tte_game) do |f| %>
+  <% if @tte_game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tte_game.errors.count, "error") %> prohibited this tte_game from being saved:</h2>
+
+      <ul>
+      <% @tte_game.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :player_a_email %><br />
+    <%= f.text_field :player_a_email %>
+  </div>
+  <div class="field">
+    <%= f.label :player_b_email %><br />
+    <%= f.text_field :player_b_email %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

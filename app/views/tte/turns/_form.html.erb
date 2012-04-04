@@ -1,0 +1,29 @@
+<%= form_for(@tte_turn) do |f| %>
+  <% if @tte_turn.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tte_turn.errors.count, "error") %> prohibited this tte_turn from being saved:</h2>
+
+      <ul>
+      <% @tte_turn.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :game_id %><br />
+    <%= f.number_field :game_id %>
+  </div>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.number_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :board %><br />
+    <%= f.number_field :board %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

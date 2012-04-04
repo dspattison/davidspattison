@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111020040952) do
+ActiveRecord::Schema.define(:version => 20120404033913) do
 
   create_table "spaste_pastes", :force => true do |t|
     t.text     "body"
@@ -23,6 +23,21 @@ ActiveRecord::Schema.define(:version => 20111020040952) do
   end
 
   add_index "spaste_pastes", ["public_key"], :name => "index_spaste_pastes_on_public_key"
+
+  create_table "tte_games", :force => true do |t|
+    t.string   "player_a_email"
+    t.string   "player_b_email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tte_turns", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "number"
+    t.integer  "board"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "urlshorts", :force => true do |t|
     t.string   "target_url"
