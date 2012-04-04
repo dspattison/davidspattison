@@ -13,13 +13,18 @@ class Tte::Board
     @squares = compute_squares @board
   end
   
-  def legalMove?(square_id)
+  def legal_move?(square_id)
     return false if has_winner? 
     square(square_id) == TILE_EMPTY
   end
   
+  def valid_tile?(tile)
+    [TILE_EMPTY, TILE_X, TILE_O].include? tile
+  end
+  
   def move!(square_id, tile)
-    raise Exception.new("Invalid Move") unless legalMove? square_id
+    raise Exception.new("Invalid Move") unless legal_move? square_id
+    raise Exception.new("Invalid Tile") unless valid_tile? tile
     
     
     board_bits = 0
@@ -47,6 +52,14 @@ class Tte::Board
   
   def squares
     @squares
+  end
+  
+  def nested_squares
+    [@squares[0..2], @squares[3..5], @squares[6..8]]
+  end
+  
+  def board
+    @board
   end
   
   

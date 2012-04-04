@@ -1,0 +1,10 @@
+
+<table class="board-table">
+	<%@board.nested_squares.each do |row|%>
+		<tr>
+			<% row.each do |cell|%>
+				<td><%=h cell%></td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
