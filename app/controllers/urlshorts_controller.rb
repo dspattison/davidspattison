@@ -81,6 +81,12 @@ class UrlshortsController < ApplicationController
   
   def redirect
     @urlshort = Urlshort.find_by_code(params[:code])
+    if @urlshort.nil?
+      respond_to do |format|
+        format.html { redirect_to(:action=>:index, :notice=>'Not found') }
+      end
+      return
+    end
     respond_to do |format|
       format.html { redirect_to(@urlshort.target_url) }
       format.xml  { head :ok }
