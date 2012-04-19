@@ -10,6 +10,12 @@
 			<dd>Classic 1 Table app</dd>
 			<dd>Had to do it with my new patt.us domain.</dd>
 			<dd>Since no one uses it (except you?) so the urls are really short.</dd>
+			<dd>Try it: 
+				<%= form_for(@urlshort, :html =>{:style=>'display:inline'}) do |f| %>
+					<%= f.text_field :target_url, :type=>'url' %>
+					<%= f.submit :value=>'Shorten!'%>
+				<% end %>
+			</dd>
 			
 			<dt><%= link_to "Most Recently Used Bart Android App", 'http://patt.us/u/2' %></dt>
 			<dd>Simple Bart Android app.</dd>
