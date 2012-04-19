@@ -1,5 +1,5 @@
 
-<h1>Your Move against </h1>
+<h1>Your Move against <%=h @other_player_name%></h1>
 
 <table class="board-table" style="font-size:200%; border:2" border="2">
 	<%i = 0%>
@@ -8,12 +8,17 @@
 			<% row.each do |cell|%>
 				<td>
 					<% if cell==0 %>
-						go here
+						<%=link_to 'GO', tte_game_path(@tte_game,  :tte_game=>{:player=>@current_player, :square=>i})%>
 					<% else %>
 						<%=h cell == Tte::Board::TILE_X ? 'X' : 'O'%>
 					<% end %>
+					<% i = i+1 %>
 				</td>
 			<% end %>
 		</tr>
 	<% end %>
 </table>
+<br/>
+<%=h @tte_game.inspect%><br/>
+<%=h @last_turn.inspect%><br/>
+<%=h @board.inspect%><br/>
