@@ -14,6 +14,8 @@ class Tte::GamesController < ApplicationController
   # GET /tte/games/1.json
   def show
     @tte_game = Tte::Game.find(params[:id])
+    
+    #Tte::TurnMailer.turn_notify(@tte_game,Tte::Turn.find_by_game_id(@tte_game.id, :order => "number DESC")).deliver
 
     respond_to do |format|
       format.html # show.html.erb
@@ -88,6 +90,7 @@ class Tte::GamesController < ApplicationController
     
   end
   
+  #advances the board with a turn
   def move
     begin
       @tte_game = Tte::Game.find(params[:game_id])
@@ -123,6 +126,8 @@ class Tte::GamesController < ApplicationController
     
     this_turn = Tte::Turn.new({:game_id=>@tte_game.id, :number=>last_turn.number+1, :board => @board.board})
     this_turn.save
+    
+    Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
     
     
     render 'new', :notice=>'Turn completed'

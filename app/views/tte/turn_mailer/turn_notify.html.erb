@@ -1,0 +1,19 @@
+
+<h1>Your Move against </h1>
+
+<table class="board-table" style="font-size:200%; border:2" border="2">
+	<%i = 0%>
+	<%@board.nested_squares.each do |row|%>
+		<tr>
+			<% row.each do |cell|%>
+				<td>
+					<% if cell==0 %>
+						go here
+					<% else %>
+						<%=h cell == Tte::Board::TILE_X ? 'X' : 'O'%>
+					<% end %>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
