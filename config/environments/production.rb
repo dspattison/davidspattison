@@ -49,8 +49,12 @@ Davidspattison::Application.configure do
   
   config.action_mailer.default_url_options = { :host => "patt.us", :protocol=> 'https'}
   
-  config.action_mailer.smtp_settings = {
-    :address  => 'localhost',
-    :port     => 25
+  ActionMailer::Base.delivery_method = :smtp
+
+  ActionMailer::Base.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address        => "localhost",
+    :port           => 25,
+    :domain         => "patt.us",
   }
 end
