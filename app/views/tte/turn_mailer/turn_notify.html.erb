@@ -8,7 +8,7 @@
 			<% row.each do |cell|%>
 				<td>
 					<% if cell==0 %>
-						<%=link_to 'GO', tte_game_move_path(@tte_game, :tte_game=>{:player=>@current_player, :square=>i})%>
+						<%=link_to 'GO', tte_game_move_path(@tte_game, :only_path => false, :tte_game=>{:player=>@current_player, :square=>i})%>
 					<% else %>
 						<%=h cell == Tte::Board::TILE_X ? 'X' : 'O'%>
 					<% end %>

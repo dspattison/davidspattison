@@ -56,5 +56,6 @@ Davidspattison::Application.configure do
     :address        => "localhost",
     :port           => 25,
     :domain         => "patt.us",
+    :openssl_verify_mode  => 'none',
   }
 end
