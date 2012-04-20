@@ -45,9 +45,34 @@ class Tte::GamesController < ApplicationController
   # POST /tte/games.json
   def create
     @tte_game = Tte::Game.new(params[:tte_game])
+    
+    board = Tte::Board.new 0
+    if !board.legal_move? params[:square].to_i
+       respond_to do |format|
+         format.html { render :action => "new", :alert=> "illegal move"}
+         format.json { render :json => @tte_game.errors, :status => :unprocessable_entity }
+       end
+       return
+    end
+    
+    board.move! params[:square].to_i, Tte::Board::TILE_X
+    
+    logger.debug "borad= #{board}"
+    
+    
 
     respond_to do |format|
-      if @tte_game.save && Tte::Turn.new({:game_id => @tte_game.id, :number=>0, :board => params[:square]}).save
+      
+      if @tte_game.save
+        this_turn = Tte::Turn.new({:game_id => @tte_game.id, :number=>0, :board => board.board})
+        
+        this_turn.save
+        
+        begin
+          Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
+        rescue Exception=>ex
+          logger.error "Error sending the email: #{ex.inspect}"
+        end
         
         format.html { redirect_to @tte_game, :notice => 'Game was successfully created.' }
         format.json { render :json => @tte_game, :status => :created, :location => @tte_game }
