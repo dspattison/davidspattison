@@ -52,10 +52,10 @@ Davidspattison::Application.configure do
   ActionMailer::Base.delivery_method = :smtp
 
   ActionMailer::Base.smtp_settings = {
-    :enable_starttls_auto => true,
-    :address        => "localhost",
-    :port           => 25,
-    :domain         => "patt.us",
-    :openssl_verify_mode  => 'none',
+    :address        => "email-smtp.us-east-1.amazonaws.com",
+    :port           => 587,
+    :domain         => "gmail.com",
+    :authentication => :plain,
+    :user_name      => "AKIAIOYLMDYCBYMDMIJQ",
+    :password       => "Aqn3es0FyjpMwnyl2sArgEkiv6iOvVYEZj4H9o0upl6i"
   }
-end
