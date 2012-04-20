@@ -137,7 +137,12 @@ class Tte::GamesController < ApplicationController
     this_turn = Tte::Turn.new({:game_id=>@tte_game.id, :number=>last_turn.number+1, :board => @board.board})
     this_turn.save
     
-    Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
+    begin
+      Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
+    rescue Exception=>ex
+      @message_class = 'warning'
+      @message = 'oops, error sending the email'
+    end
     
     @message_class = 'good'
     @message ="Turn completed"
