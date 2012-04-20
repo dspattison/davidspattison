@@ -16,8 +16,11 @@ class Tte::TurnMailer < ActionMailer::Base
       @current_player_name = tte_game.player_a_email
     end
     
+    @subject = "[tic-tac-email] Your Move against #{@other_player_name}"
     
-    mail(:to => @current_player_name) do |format|
+    
+    
+    mail(:to => @current_player_name, :subject=>@subject) do |format|
        format.html
     end
   end

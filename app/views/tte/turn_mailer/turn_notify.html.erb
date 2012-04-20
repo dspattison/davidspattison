@@ -1,7 +1,8 @@
 
 <h1>Your Move against <%=h @other_player_name%></h1>
+<p>You are player <%= @current_player == Tte::Board::TILE_X ? 'X' : 'O'%></p>
 
-<table class="board-table" style="font-size:200%; border:2" border="2">
+<table class="board-table" style="font-size:300%; border:2" border="2">
 	<%i = 0%>
 	<%@board.nested_squares.each do |row|%>
 		<tr>

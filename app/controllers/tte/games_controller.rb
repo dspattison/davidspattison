@@ -92,10 +92,14 @@ class Tte::GamesController < ApplicationController
   
   #advances the board with a turn
   def move
+    @message = ''
+    @message_class = ''
     begin
       @tte_game = Tte::Game.find(params[:game_id])
     rescue ActiveRecord::RecordNotFound => ex
-      render 'new', :alert=>'game not found'
+      @message_class = 'alert'
+      @message = 'game not found'
+      render 
       return
     end
     
@@ -104,7 +108,9 @@ class Tte::GamesController < ApplicationController
     begin
       last_turn = Tte::Turn.find_by_game_id @tte_game.id, :order => "number DESC"
     rescue ActiveRecord::RecordNotFound => ex
-      redirect 'new', :alert=>'turn not found'
+      @message_class = 'amber'
+      @message = 'turn not found'
+      render
       return
     end
     
@@ -113,12 +119,16 @@ class Tte::GamesController < ApplicationController
     @board = Tte::Board.new last_turn.board
     
     if @board.has_winner?
-      render 'new', :notice => 'game already over'
+      @message_class = 'warning'
+      @message = 'game already over'
+      render
       return
     end
     
     if !@board.legal_move? square
-      render 'new', :alert => 'illegal move'
+      @message_class = 'warning'
+      @message = 'illegal move'
+      render 
       return
     end
     
@@ -129,7 +139,8 @@ class Tte::GamesController < ApplicationController
     
     Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
     
-    
-    render 'new', :notice=>'Turn completed'
+    @message_class = 'good'
+    @message ="Turn completed"
+    render 
   end
 end
