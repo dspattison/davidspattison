@@ -59,3 +59,4 @@ Davidspattison::Application.configure do
     :user_name      => "AKIAIOYLMDYCBYMDMIJQ",
     :password       => "Aqn3es0FyjpMwnyl2sArgEkiv6iOvVYEZj4H9o0upl6i"
   }
+end
