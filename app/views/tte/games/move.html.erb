@@ -4,7 +4,11 @@
 
 <p>Your opponet will process their turn shortly</p>
 
-<p><%= link_to 'New Game', new_tte_game_path %></p>
+<p>
+	<%= link_to 'Restart the new Game', new_tte_game_path(:tte_game=>{:player_b_email=> @current_player_email, :player_a_email=>@other_player_email}) %>
+	<%= link_to 'Start a new Game', new_tte_game_path(:tte_game=>{:player_b_email=> @current_player_email}) %>
+</p>
+
 
 
 

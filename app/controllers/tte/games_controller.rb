@@ -128,6 +128,9 @@ class Tte::GamesController < ApplicationController
     
     player = params[:tte_game][:player].to_i
     square = params[:tte_game][:square].to_i
+    
+    @current_player_email = player == Tte::Board::TILE_X ? @tte_game.player_b_email : @tte_game.player_a_email
+    @other_player_email = player == Tte::Board::TILE_O ? @tte_game.player_b_email : @tte_game.player_a_email
     begin
       last_turn = Tte::Turn.find_by_game_id @tte_game.id, :order => "number DESC"
     rescue ActiveRecord::RecordNotFound => ex
