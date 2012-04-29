@@ -37,6 +37,16 @@ class Tte::Board
     
   end
   
+  #gives the player who will do the next move
+  def next_player
+    count_x = @squares.count{|x| x == TILE_X}
+    count_o = @squares.count{|x| x == TILE_O}
+    if count_x == count_o
+      return TILE_X
+    end
+    return TILE_O
+  end
+  
   def has_winner?
     !@winner.nil?
   end

@@ -143,6 +143,13 @@ class Tte::GamesController < ApplicationController
     
     @board = Tte::Board.new last_turn.board
     
+    if player != @board.next_player
+      @message_class = 'alert'
+      @message = 'no cheating, wait your turn'
+      render
+      return
+    end
+    
     if @board.has_winner?
       @message_class = 'warning'
       @message = 'game already over'
