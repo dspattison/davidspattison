@@ -12,15 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :player_a_email %><br />
+    <%= f.label "Your Opponent's email address:" %><br />
     <%= f.text_field :player_a_email %>
   </div>
   <div class="field">
-    <%= f.label :player_b_email %><br />
+    <%= f.label "Your email address:" %><br />
     <%= f.text_field :player_b_email %>
   </div>
   
-  <%= render 'board_form' %>
+  <div class="field">
+  	<%= f.label "Your first move as X:" %><br />
+  	<%= render 'board_form' %>
+  </div>
   
   <div class="actions">
     <%= f.submit %>
