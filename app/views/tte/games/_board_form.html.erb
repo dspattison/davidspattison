@@ -1,17 +1,18 @@
-
+<%= stylesheet_link_tag "tte_board" %>
 <table class="board-table">
-	<%i = -1%>
+	<%i = 0%>
 	<%@board.nested_squares.each do |row|%>
 		<tr>
 			<% row.each do |cell|%>
-				<td>
+				<td class='tte-square'>
 					<% if cell==0 %>
-						<input type="radio" name='square' value='<%= (i=i+1) %>'>
+						<input class='tte-input' type="radio" name='square' value='<%= i %>'>
 					<% else %>
 						<%=h cell == Tte::Board::TILE_X ? 'X' : 'O'%>
 					<% end %>
 				</td>
 			<% end %>
 		</tr>
+		<% i=i+1 %>
 	<% end %>
 </table>
