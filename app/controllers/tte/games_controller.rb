@@ -2,12 +2,10 @@ class Tte::GamesController < ApplicationController
   # GET /tte/games
   # GET /tte/games.json
   def index
-    @tte_games = Tte::Game.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @tte_games }
-    end
+    #sames a new
+    @tte_game = Tte::Game.new params[:tte_game]
+    @board = Tte::Board.new 0
+    render :action => 'new' 
   end
 
   # GET /tte/games/1
@@ -26,7 +24,7 @@ class Tte::GamesController < ApplicationController
   # GET /tte/games/new
   # GET /tte/games/new.json
   def new
-    @tte_game = Tte::Game.new
+    @tte_game = Tte::Game.new params[:tte_game]
     @board = Tte::Board.new 0
 
     respond_to do |format|
