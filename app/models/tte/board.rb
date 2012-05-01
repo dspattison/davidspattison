@@ -96,8 +96,7 @@ class Tte::Board
         return @squares[set[0]]
       end
     end
-    # #do across
-   nil
+    nil
   end
   
   def array_same_non_zero_value values
