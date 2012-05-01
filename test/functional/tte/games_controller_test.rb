@@ -5,20 +5,16 @@ class Tte::GamesControllerTest < ActionController::TestCase
     @tte_game = tte_games(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:tte_games)
-  end
-
   test "should get new" do
     get :new
     assert_response :success
   end
 
   test "should create tte_game" do
-    assert_difference('Tte::Game.count') do
-      post :create, :tte_game => @tte_game.attributes
+    assert_difference('Tte::Turn.count') do
+      assert_difference('Tte::Game.count') do
+        post :create, :tte_game => @tte_game.attributes
+      end
     end
 
     assert_redirected_to tte_game_path(assigns(:tte_game))
@@ -46,4 +42,19 @@ class Tte::GamesControllerTest < ActionController::TestCase
 
     assert_redirected_to tte_games_path
   end
+  
+  # test "move basic" do
+    # assert_difference('Tte::Turn.count') do
+      # assert_difference('Tte::Game.count') do
+        # post :create, {:square=>0, :tte_game => @tte_game.attributes}
+      # end
+    # end
+# 
+    # assert_redirected_to tte_game_path(assigns(:tte_game))
+#     
+    # assert_difference('Tte::Turn.count') do
+      # get :move, {:game_id=>@tte_game.id, :tte_game => {:square=>1, :player=>Tte::Board::TILE_O}}
+    # end
+# 
+  # end
 end
