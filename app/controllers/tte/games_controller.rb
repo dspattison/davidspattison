@@ -55,7 +55,7 @@ class Tte::GamesController < ApplicationController
     
     board.move! params[:square].to_i, Tte::Board::TILE_X
     
-    logger.debug "borad= #{board}"
+    logger.debug "board= #{board.inspect}"
     
     
 
@@ -64,7 +64,7 @@ class Tte::GamesController < ApplicationController
       if @tte_game.save
         this_turn = Tte::Turn.new({:game_id => @tte_game.id, :number=>0, :board => board.board})
         
-        this_turn.save
+        logger.error "Turn not saved! #{this_turn.inspect}" unless this_turn.save! 
         
         begin
           Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
@@ -128,9 +128,14 @@ class Tte::GamesController < ApplicationController
     
     player = params[:tte_game][:player].to_i
     square = params[:tte_game][:square].to_i
+    last_turn = nil
     begin
       last_turn = Tte::Turn.find_by_game_id @tte_game.id, :order => "number DESC"
     rescue ActiveRecord::RecordNotFound => ex
+      #handled in next clause
+    end
+    
+    if last_turn.nil?
       @message_class = 'amber'
       @message = 'turn not found'
       render

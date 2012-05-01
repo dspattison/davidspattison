@@ -21,11 +21,8 @@ class Tte::Board
   
   def initialize(board)
     @board = board
-    @winner = nil
-    if has_winner?
-      @winner = compute_winner
-    end
     @squares = compute_squares @board
+    @winner = compute_winner
   end
   
   def legal_move?(square_id)

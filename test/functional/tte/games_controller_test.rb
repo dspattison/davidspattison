@@ -43,18 +43,35 @@ class Tte::GamesControllerTest < ActionController::TestCase
     assert_redirected_to tte_games_path
   end
   
-  # test "move basic" do
-    # assert_difference('Tte::Turn.count') do
-      # assert_difference('Tte::Game.count') do
-        # post :create, {:square=>0, :tte_game => @tte_game.attributes}
-      # end
-    # end
-# 
-    # assert_redirected_to tte_game_path(assigns(:tte_game))
-#     
-    # assert_difference('Tte::Turn.count') do
-      # get :move, {:game_id=>@tte_game.id, :tte_game => {:square=>1, :player=>Tte::Board::TILE_O}}
-    # end
-# 
-  # end
+  test "move basic" do
+    assert_difference('Tte::Turn.count') do
+      assert_difference('Tte::Game.count') do
+        post :create, {:square=>0, :tte_game => {:player_a_email=>'a@patt.us', :player_b_email=>'b@patt.us'}}
+      end
+    end
+    
+    assert assigns(:tte_game)
+    @tte_game = assigns(:tte_game)
+
+    assert_redirected_to tte_game_path(assigns(:tte_game))
+    
+    def assert_do_move square, player, is_valid=true
+      assert_difference('Tte::Turn.count') do
+        get :move, {:game_id=>@tte_game.to_param, :tte_game => {:square=>square, :player=>player}}
+        assert assigns(:message), "no message!!?"
+        if is_valid
+          assert 'good' == assigns(:message_class), "message class is not good: #{assigns(:message_class)}"
+        else
+          assert 'good' != assigns(:message_class), "message class is good: #{assigns(:message_class)}"
+        end
+      end
+    end
+    
+   assert_do_move 3, Tte::Board::TILE_O
+   assert_do_move 1, Tte::Board::TILE_X
+   assert_do_move 4, Tte::Board::TILE_O
+   #assert_do_move 2, Tte::Board::TILE_X, false
+   #assert_do_move 4, Tte::Board::TILE_O, false
+
+  end
 end
