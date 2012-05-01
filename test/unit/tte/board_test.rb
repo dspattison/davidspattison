@@ -53,5 +53,23 @@ class Tte::BoardTest < ActiveSupport::TestCase
     assert result, msg
   end 
   
+  
+  test 'moves with re-creates' do
+    @b = Tte::Board.new 0
+    def move! square, tile, winner=nil
+      @b = Tte::Board.new @b.board #re-create the board from scratch
+      @b.move! square, tile
+      assert !winner.nil? == @b.has_winner?, "has_winner? != #{winner.inspect} #{@b.inspect}"
+      assert @b.winner == winner, "Winner is wrong #{@b.inspect}"
+    end
+    move! 0, Tte::Board::TILE_X
+    move! 3, Tte::Board::TILE_O
+    move! 1, Tte::Board::TILE_X
+    move! 4, Tte::Board::TILE_O
+    move! 2, Tte::Board::TILE_X, Tte::Board::TILE_X 
+    
+    assert @b.has_winner?
+    assert @b.winner == Tte::Board::TILE_X
+  end
 end
 
