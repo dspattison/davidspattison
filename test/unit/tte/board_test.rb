@@ -2,18 +2,6 @@ require 'test_helper'
 
 class Tte::BoardTest < ActiveSupport::TestCase
   
-  
-  test "x moves" do
-    b = Tte::Board.new 0
-    b.move! 0, Tte::Board::TILE_X
-    b.move! 1, Tte::Board::TILE_X
-    b.move! 2, Tte::Board::TILE_X
-    
-    assert b.has_winner?
-    assert b.winner == Tte::Board::TILE_X
-    
-  end
-  
   test "both moves" do
     b = Tte::Board.new 0
     b.move! 0, Tte::Board::TILE_X
@@ -21,11 +9,8 @@ class Tte::BoardTest < ActiveSupport::TestCase
     b.move! 1, Tte::Board::TILE_X
     b.move! 4, Tte::Board::TILE_O
     b.move! 2, Tte::Board::TILE_X
-    begin
+    assert_exception do
       b.move! 5, Tte::Board::TILE_O #already lost
-      assert false, 'should not allow move once there is a winner'
-    rescue Exception=>ex
-      assert true
     end
     
     
@@ -34,6 +19,39 @@ class Tte::BoardTest < ActiveSupport::TestCase
     assert b.winner == Tte::Board::TILE_X
     
   end
+  
+  test "reject cheaters" do
+    b = Tte::Board.new 0
+    b.move! 0, Tte::Board::TILE_X
+     
+    assert_exception 'moving to already taken square' do
+      b.move! 0, Tte::Board::TILE_O
+    end
+    
+    assert_exception 'out of order turn' do
+      b.move! 1, Tte::Board::TILE_X
+    end
+    
+    assert_exception 'not a realy tile' do
+      #
+      b.move! 9, Tte::Board::TILE_X
+    end
+    
+    assert_exception 'not a realy player' do
+      b.move! 1, 3
+    end
+  end
+  
+  private 
+  def assert_exception msg=''
+    result = false
+    begin
+      yield
+    rescue Exception=>ex
+      result = true
+    end
+    assert result, msg
+  end 
   
 end
 

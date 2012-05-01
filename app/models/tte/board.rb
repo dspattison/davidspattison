@@ -4,6 +4,21 @@ class Tte::Board
   TILE_X      = 1
   TILE_O      = 2
   
+  @@winning_combos = [
+    #left right
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    #up down
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    #across
+    [0, 4, 8],
+    [6, 4, 2],
+  ]
+  
+  
   def initialize(board)
     @board = board
     @winner = nil
@@ -23,9 +38,10 @@ class Tte::Board
   end
   
   def move!(square_id, tile)
+    raise Exception.new("Has Winner") unless !has_winner?
     raise Exception.new("Invalid Move") unless legal_move? square_id
     raise Exception.new("Invalid Tile") unless valid_tile? tile
-    
+    raise Exception.new("Out of order player") unless tile == next_player
     
     board_bits = 0
     
@@ -75,21 +91,16 @@ class Tte::Board
   
   private
   
+  
   def compute_winner
     
-    #do across
-    if array_same_non_zero_value([@squares[0], @squares[1], @squares[2]])
-      return @squares[2]
+    @@winning_combos.each do |set| 
+      if array_same_non_zero_value([@squares[set[0]], @squares[set[1]], @squares[set[2]]])
+        return @squares[set[0]]
+      end
     end
-    
-    if array_same_non_zero_value([@squares[3], @squares[4], @squares[5]])
-      return @squares[3]
-    end
-    
-    if array_same_non_zero_value([@squares[6], @squares[7], @squares[8]])
-      return @squares[6]
-    end
-    
+    # #do across
+   nil
   end
   
   def array_same_non_zero_value values
@@ -106,9 +117,7 @@ class Tte::Board
     
    9.times.each do |i|
      squares[i] = (board & (3 << (i<<1))) >> (i << 1)
-     #puts board
    end
-   #puts squares.inspect
    squares
   end
   
