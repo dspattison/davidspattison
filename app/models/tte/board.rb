@@ -106,9 +106,9 @@ class Tte::Board
     
    9.times.each do |i|
      squares[i] = (board & (3 << (i<<1))) >> (i << 1)
-     puts board
+     #puts board
    end
-   puts squares.inspect
+   #puts squares.inspect
    squares
   end
   

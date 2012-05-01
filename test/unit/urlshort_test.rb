@@ -6,7 +6,7 @@ class UrlshortTest < ActiveSupport::TestCase
     100.times do
       x = Urlshort.new({:target_url=>34423})
       assert x.save
-      puts x.code
+      #puts x.code
     end
   end
 end
