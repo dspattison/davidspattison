@@ -24,6 +24,8 @@ class Tte::TurnMailerTest < ActionMailer::TestCase
     
     email = Tte::TurnMailer.tie(tte_game.player_a_email, tte_game.player_b_email).deliver
     assert !ActionMailer::Base.deliveries.empty?
+    
+    assert_equal [tte_game.player_a_email], email.to
   end
   
 end

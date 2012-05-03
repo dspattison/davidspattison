@@ -32,7 +32,7 @@ class Tte::TurnMailer < ActionMailer::Base
     @current_player_email = current_player_email
     @other_player_email = other_player_email
     
-    mail(:to => @current_player_name, :subject=>@subject) do |format|
+    mail(:to => @current_player_email, :subject=>@subject) do |format|
        format.html
     end
     

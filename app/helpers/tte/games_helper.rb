@@ -31,7 +31,8 @@ module Tte::GamesHelper
       end
     else
       begin
-        Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
+        Tte::TurnMailer.tie(@tte_game.player_a_email, @tte_game.player_b_email).deliver
+        Tte::TurnMailer.tie(@tte_game.player_b_email, @tte_game.player_a_email).deliver
       rescue Exception=>ex
         @message_class = 'warning'
         @message = 'oops, error sending the email'
