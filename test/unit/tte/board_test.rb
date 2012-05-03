@@ -56,12 +56,7 @@ class Tte::BoardTest < ActiveSupport::TestCase
   
   test 'moves with re-creates' do
     @b = Tte::Board.new 0
-    def move! square, tile, winner=nil
-      @b = Tte::Board.new @b.board #re-create the board from scratch
-      @b.move! square, tile
-      assert !winner.nil? == @b.has_winner?, "has_winner? != #{winner.inspect} #{@b.inspect}"
-      assert @b.winner == winner, "Winner is wrong #{@b.inspect}"
-    end
+    
     move! 0, Tte::Board::TILE_X
     move! 3, Tte::Board::TILE_O
     move! 1, Tte::Board::TILE_X
@@ -71,5 +66,33 @@ class Tte::BoardTest < ActiveSupport::TestCase
     assert @b.has_winner?
     assert @b.winner == Tte::Board::TILE_X
   end
+  
+  test 'tie' do 
+    @b = Tte::Board.new 0
+    move! 4, Tte::Board::TILE_X
+    move! 0, Tte::Board::TILE_O
+    move! 1, Tte::Board::TILE_X
+    move! 7, Tte::Board::TILE_O
+    move! 2, Tte::Board::TILE_X
+    move! 6, Tte::Board::TILE_O
+    move! 3, Tte::Board::TILE_X
+    move! 5, Tte::Board::TILE_O
+    
+    #move! 5, Tte::Board::TILE_X, tie!
+    @b.move! 8, Tte::Board::TILE_X
+    assert @b.game_over?, "#{@b.inspect}"
+    assert !@b.has_winner?, "#{@b.inspect}" 
+   
+  end
+  
+  private
+  
+  def move! square, tile, winner=nil
+      @b = Tte::Board.new @b.board #re-create the board from scratch
+      @b.move! square, tile
+      assert !winner.nil? == @b.game_over?, "game_over? != #{winner.inspect} #{@b.inspect}"
+      assert !winner.nil? == @b.has_winner?, "has_winner? != #{winner.inspect} #{@b.inspect}"
+      assert @b.winner == winner, "Winner is wrong #{@b.inspect}"
+    end
 end
 
