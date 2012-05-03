@@ -24,4 +24,17 @@ class Tte::TurnMailer < ActionMailer::Base
        format.html
     end
   end
+  
+  
+  def tie current_player_email, other_player_email
+    @subject = '[tic-tac-email] Tie Game!'
+    
+    @current_player_email = current_player_email
+    @other_player_email = other_player_email
+    
+    mail(:to => @current_player_name, :subject=>@subject) do |format|
+       format.html
+    end
+    
+  end
 end

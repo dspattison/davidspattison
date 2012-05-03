@@ -18,4 +18,12 @@ class Tte::TurnMailerTest < ActionMailer::TestCase
     
   end
   
+  test 'tie email' do
+    tte_game = tte_games :one
+    tte_turn = tte_turns :one
+    
+    email = Tte::TurnMailer.tie(tte_game.player_a_email, tte_game.player_b_email).deliver
+    assert !ActionMailer::Base.deliveries.empty?
+  end
+  
 end
