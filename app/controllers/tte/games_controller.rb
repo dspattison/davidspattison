@@ -102,6 +102,7 @@ class Tte::GamesController < ApplicationController
   def move
     @message = ''
     @message_class = ''
+    @new_game_link = new_tte_game_path
     begin
       @tte_game = Tte::Game.find(params[:game_id])
     rescue ActiveRecord::RecordNotFound => ex
@@ -111,9 +112,25 @@ class Tte::GamesController < ApplicationController
       return
     end
     
+    
     player = params[:tte_game][:player].to_i
     square = params[:tte_game][:square].to_i
     last_turn = nil
+    
+    if player == Tte::Board::TILE_X
+      @other_player_email = @tte_game.player_a_email
+      @current_player = Tte::Board::TILE_X
+      @current_player_email = @tte_game.player_b_email
+    else
+      @other_player_email = @tte_game.player_b_email
+      @current_player = Tte::Board::TILE_O
+      @current_player_email = @tte_game.player_a_email
+    end
+    @new_game_link = new_tte_game_path(
+      :tte_game=>{
+          :player_a_email=>@other_player_email, 
+          :player_b_email=>@current_player_email})
+    
     begin
       last_turn = Tte::Turn.find_by_game_id @tte_game.id, :order => "number DESC"
     rescue ActiveRecord::RecordNotFound => ex
