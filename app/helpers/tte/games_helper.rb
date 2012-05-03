@@ -22,7 +22,7 @@ module Tte::GamesHelper
     this_turn.save!
     
     
-    if !@board.has_winner?
+    if !@board.game_over?
       begin
         Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
       rescue Exception=>ex

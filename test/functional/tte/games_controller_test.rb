@@ -56,7 +56,7 @@ class Tte::GamesControllerTest < ActionController::TestCase
     assert_redirected_to tte_game_path(assigns(:tte_game))
     
     def assert_do_move square, player, is_valid=true
-      assert_difference('Tte::Turn.count') do
+      assert_difference(['Tte::Turn.count', 'ActionMailer::Base.deliveries.count']) do
         get :move, {:game_id=>@tte_game.to_param, :tte_game => {:square=>square, :player=>player}}
         assert assigns(:message), "no message!!?"
         if is_valid
@@ -70,7 +70,13 @@ class Tte::GamesControllerTest < ActionController::TestCase
    assert_do_move 3, Tte::Board::TILE_O
    assert_do_move 1, Tte::Board::TILE_X
    assert_do_move 4, Tte::Board::TILE_O
-   assert_do_move 2, Tte::Board::TILE_X #we have a winner!
+   
+   #we have a winner!
+   assert_difference 'Tte::Turn.count' do
+     assert_difference 'ActionMailer::Base.deliveries.count', 2 do
+       get :move, {:game_id=>@tte_game.to_param, :tte_game => {:square=>2, :player=>Tte::Board::TILE_X}}
+     end
+   end
    assert assigns(:message).include?('Won'), "no winner!? #{assigns.inspect}"
    #assert_do_move 4, Tte::Board::TILE_O, false
 

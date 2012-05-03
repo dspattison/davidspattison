@@ -64,6 +64,12 @@ class Tte::Board
     !@winner.nil?
   end
   
+  def game_over?
+    return true unless !has_winner?
+    return true unless squares.include? 0 #all squares are taken
+    return false
+  end
+  
   def winner
     @winner
   end
