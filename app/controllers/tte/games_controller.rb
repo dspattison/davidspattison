@@ -161,6 +161,13 @@ class Tte::GamesController < ApplicationController
       return
     end
     
+    if @board.game_over?
+      @message_class = 'good'
+      @message ="Tie Game!"
+      render
+      return
+    end
+    
     @message_class = 'good'
     @message ="Turn completed"
     render 

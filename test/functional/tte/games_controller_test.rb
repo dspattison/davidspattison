@@ -74,11 +74,33 @@ class Tte::GamesControllerTest < ActionController::TestCase
    #we have a winner!
    assert_difference 'Tte::Turn.count' do
      assert_difference 'ActionMailer::Base.deliveries.count', 2 do
-       get :move, {:game_id=>@tte_game.to_param, :tte_game => {:square=>2, :player=>Tte::Board::TILE_X}}
+       get :move, {
+         :game_id=>@tte_game.to_param, 
+         :tte_game => {:square=>2, :player=>Tte::Board::TILE_X}}
      end
    end
    assert assigns(:message).include?('Won'), "no winner!? #{assigns.inspect}"
    #assert_do_move 4, Tte::Board::TILE_O, false
+
+  end
+  
+  test "tieing move" do
+    #just create a full board
+    @tte_game = Tte::Game.new
+    @tte_game.save!
+    @tte_turn = Tte::Turn.new({:board=> 43350, :game_id=>@tte_game.id, :number=>1})
+    @tte_turn.save!
+    
+    assert_difference 'Tte::Turn.count' do
+      assert_difference 'ActionMailer::Base.deliveries.count', 2 do
+        get :move, {
+          :game_id=>@tte_game.to_param, 
+          :tte_game => {:square=>8, :player=>Tte::Board::TILE_X}}
+        #raise Exception.new(Tte::Turn.all.inspect)
+      end
+    end
+    
+    assert assigns(:message).include?('Tie'), "no tie!? #{assigns.inspect}"
 
   end
 end
