@@ -1,4 +1,5 @@
 class Tte::GamesController < ApplicationController
+  include Tte::GamesHelper
   # GET /tte/games
   # GET /tte/games.json
   def index
@@ -43,35 +44,19 @@ class Tte::GamesController < ApplicationController
   # POST /tte/games.json
   def create
     @tte_game = Tte::Game.new(params[:tte_game])
+    @board = Tte::Board.new 0
     
-    board = Tte::Board.new 0
-    if !board.legal_move? params[:square].to_i
-       respond_to do |format|
-         format.html { render :action => "new", :alert=> "illegal move"}
-         format.json { render :json => @tte_game.errors, :status => :unprocessable_entity }
-       end
-       return
+    success = true
+    @tte_game.save! or success = false
+    begin
+      success and perform_move @tte_game, nil, params[:square].to_i, Tte::Board::TILE_X
+    rescue Exception=>ex
+      logger.error ex.inspect
+      success = false
     end
     
-    board.move! params[:square].to_i, Tte::Board::TILE_X
-    
-    logger.debug "board= #{board.inspect}"
-    
-    
-
     respond_to do |format|
-      
-      if @tte_game.save
-        this_turn = Tte::Turn.new({:game_id => @tte_game.id, :number=>0, :board => board.board})
-        
-        logger.error "Turn not saved! #{this_turn.inspect}" unless this_turn.save! 
-        
-        begin
-          Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
-        rescue Exception=>ex
-          logger.error "Error sending the email: #{ex.inspect}"
-        end
-        
+      if success
         format.html { redirect_to @tte_game, :notice => 'Game was successfully created.' }
         format.json { render :json => @tte_game, :status => :created, :location => @tte_game }
       else
@@ -142,41 +127,21 @@ class Tte::GamesController < ApplicationController
       return
     end
     
-    logger.info last_turn.inspect
-    
-    @board = Tte::Board.new last_turn.board
-    
-    if player != @board.next_player
-      @message_class = 'alert'
-      @message = 'no cheating, wait your turn'
-      render
-      return
-    end
-    
-    if @board.has_winner?
-      @message_class = 'warning'
-      @message = 'game already over'
-      render
-      return
-    end
-    
-    if !@board.legal_move? square
-      @message_class = 'warning'
-      @message = 'illegal move'
-      render 
-      return
-    end
-    
-    @board.move! square, player
-    
-    this_turn = Tte::Turn.new({:game_id=>@tte_game.id, :number=>last_turn.number+1, :board => @board.board})
-    this_turn.save
-    
     begin
-      Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
+      this_turn = perform_move @tte_game, last_turn, square, player
     rescue Exception=>ex
       @message_class = 'warning'
-      @message = 'oops, error sending the email'
+      @message = ex.message
+      render
+      return
+    end
+    
+    @board = Tte::Board.new this_turn.board
+    if @board.has_winner?
+      @message_class = 'good'
+      @message ="You Won!!!"
+      render
+      return
     end
     
     @message_class = 'good'

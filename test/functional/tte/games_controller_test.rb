@@ -60,9 +60,9 @@ class Tte::GamesControllerTest < ActionController::TestCase
         get :move, {:game_id=>@tte_game.to_param, :tte_game => {:square=>square, :player=>player}}
         assert assigns(:message), "no message!!?"
         if is_valid
-          assert 'good' == assigns(:message_class), "message class is not good: #{assigns(:message_class)}"
+          assert 'good' == assigns(:message_class), "message class is not good: #{assigns(:message_class)} #{assigns().inspect}"
         else
-          assert 'good' != assigns(:message_class), "message class is good: #{assigns(:message_class)}"
+          assert 'good' != assigns(:message_class), "message class is good: #{assigns(:message_class)}  #{assigns().inspect}"
         end
       end
     end
@@ -70,7 +70,8 @@ class Tte::GamesControllerTest < ActionController::TestCase
    assert_do_move 3, Tte::Board::TILE_O
    assert_do_move 1, Tte::Board::TILE_X
    assert_do_move 4, Tte::Board::TILE_O
-   #assert_do_move 2, Tte::Board::TILE_X, false
+   assert_do_move 2, Tte::Board::TILE_X #we have a winner!
+   assert assigns(:message).include?('Won'), "no winner!? #{assigns.inspect}"
    #assert_do_move 4, Tte::Board::TILE_O, false
 
   end
