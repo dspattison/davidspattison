@@ -7,7 +7,7 @@
 	<%@board.nested_squares.each do |row|%>
 		<tr>
 			<% row.each do |cell|%>
-				<td>
+				<td style="padding:5px;">
 					<% if cell==0 %>
 						<%=link_to 'GO', tte_game_move_path(@tte_game, :only_path => false, :tte_game=>{:player=>@current_player, :square=>i})%>
 					<% else %>
@@ -21,6 +21,8 @@
 </table>
 <br/>
 
+<h2>
 <%# block at end makes it disappear%>
 <%=link_to_if(@current_player == Tte::Board::TILE_X, 'Play Another Game', new_tte_game_path(:only_path => false, :tte_game=>{:player_a_email=>@tte_game.player_a_email, :player_b_email=>@tte_game.player_b_email})){}%>
 <%=link_to_if(@current_player == Tte::Board::TILE_O, 'Play Another Game', new_tte_game_path(:only_path => false, :tte_game=>{:player_a_email=>@tte_game.player_b_email, :player_b_email=>@tte_game.player_a_email})){}%>
+</h2>

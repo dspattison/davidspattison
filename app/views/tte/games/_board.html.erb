@@ -3,7 +3,13 @@
 	<%@board.nested_squares.each do |row|%>
 		<tr>
 			<% row.each do |cell|%>
-				<td><%=h cell%></td>
+				<td class='tte-square'>
+					<%if cell == 0%>
+						&nbsp;&nbsp;&nbsp;
+					<% else %>
+						<%=h (cell == Tte::Board::TILE_X ? 'X' : 'O') unless cell == 0%>
+					<% end %>
+				</td>
 			<% end %>
 		</tr>
 	<% end %>

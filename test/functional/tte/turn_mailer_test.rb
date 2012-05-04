@@ -18,11 +18,11 @@ class Tte::TurnMailerTest < ActionMailer::TestCase
     
   end
   
-  test 'tie email' do
-    tte_game = tte_games :one
-    tte_turn = tte_turns :one
+  test 'game over email' do
+    tte_game = tte_games :game_over_tie
+    tte_turn = tte_turns :game_over_tie
     
-    email = Tte::TurnMailer.tie(tte_game.player_a_email, tte_game.player_b_email).deliver
+    email = Tte::TurnMailer.game_over(tte_game, tte_turn, tte_game.player_a_email, tte_game.player_b_email).deliver
     assert !ActionMailer::Base.deliveries.empty?
     
     assert_equal [tte_game.player_a_email], email.to

@@ -9,3 +9,20 @@ two:
   game_id: 1
   number: 1
   board: 1
+
+
+tie:
+  game_id: 3
+  number: 1
+  board: 43350
+
+
+win:
+  game_id: 4
+  number: 1
+  board: 645
+  
+game_over_tie:
+  game_id: 5
+  number: 1
+  board: 108886

@@ -26,13 +26,31 @@ class Tte::TurnMailer < ActionMailer::Base
   end
   
   
-  def tie current_player_email, other_player_email
-    @subject = '[tic-tac-email] Tie Game!'
+  def game_over tte_game, last_turn, current_player_email, other_player_email
+    @board = Tte::Board.new last_turn.board
+    @tte_game = tte_game
+    @last_turn = last_turn
+    
+    raise Exception.new("Game is not over") unless @board.game_over?
+    @title = 'oops'
+    if !@board.has_winner?
+      @title = "Tie Game! against #{other_player_email}"
+    else
+      #XOR
+      if (current_player_email == @tte_game.player_b_email) == (@board.winner == Tte::Board::TILE_X)
+        #current player is the winner
+        @title = "You Won against #{other_player_email} :)"
+      else
+        #current player is a LOSER!
+        @title = "You Lost against #{other_player_email} :("
+      end 
+       
+    end
     
     @current_player_email = current_player_email
     @other_player_email = other_player_email
     
-    mail(:to => @current_player_email, :subject=>@subject) do |format|
+    mail(:to => @current_player_email, :subject=>"[tic-tac-email] #{@title}") do |format|
        format.html
     end
     

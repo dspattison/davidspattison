@@ -103,6 +103,7 @@ class Tte::GamesController < ApplicationController
     @message = ''
     @message_class = ''
     @new_game_link = new_tte_game_path
+    @board = Tte::Board.new 0
     begin
       @tte_game = Tte::Game.find(params[:game_id])
     rescue ActiveRecord::RecordNotFound => ex
