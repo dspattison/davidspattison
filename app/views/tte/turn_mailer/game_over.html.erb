@@ -1,0 +1,28 @@
+
+<h1><%=h @title%></h1>
+
+<table style="font-size:300%; border:2" border="2">
+	<%@board.nested_squares.each do |row|%>
+		<tr>
+			<% row.each do |cell|%>
+				<td style="padding:5px;">
+					<%if cell == 0%>
+						&nbsp;&nbsp;&nbsp;
+					<% else %>
+						<%=h cell == Tte::Board::TILE_X ? 'X' : 'O'%>
+					<% end %>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+
+<h2>
+<%=link_to(
+	'Play Another Game', 
+	new_tte_game_path(
+		:only_path => false, 
+		:tte_game=>{
+			:player_a_email=>@other_player_email, 
+			:player_b_email=>@current_player_email}))%>
+</h2>

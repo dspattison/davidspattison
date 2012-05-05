@@ -5,20 +5,16 @@ class Tte::GamesControllerTest < ActionController::TestCase
     @tte_game = tte_games(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:tte_games)
-  end
-
   test "should get new" do
     get :new
     assert_response :success
   end
 
   test "should create tte_game" do
-    assert_difference('Tte::Game.count') do
-      post :create, :tte_game => @tte_game.attributes
+    assert_difference('Tte::Turn.count') do
+      assert_difference('Tte::Game.count') do
+        post :create, :tte_game => @tte_game.attributes
+      end
     end
 
     assert_redirected_to tte_game_path(assigns(:tte_game))
@@ -45,5 +41,66 @@ class Tte::GamesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to tte_games_path
+  end
+  
+  test "move basic" do
+    assert_difference('Tte::Turn.count') do
+      assert_difference('Tte::Game.count') do
+        post :create, {:square=>0, :tte_game => {:player_a_email=>'a@patt.us', :player_b_email=>'b@patt.us'}}
+      end
+    end
+    
+    assert assigns(:tte_game)
+    @tte_game = assigns(:tte_game)
+
+    assert_redirected_to tte_game_path(assigns(:tte_game))
+    
+    def assert_do_move square, player, is_valid=true
+      assert_difference(['Tte::Turn.count', 'ActionMailer::Base.deliveries.count']) do
+        get :move, {:game_id=>@tte_game.to_param, :tte_game => {:square=>square, :player=>player}}
+        assert assigns(:message), "no message!!?"
+        if is_valid
+          assert 'good' == assigns(:message_class), "message class is not good: #{assigns(:message_class)} #{assigns().inspect}"
+        else
+          assert 'good' != assigns(:message_class), "message class is good: #{assigns(:message_class)}  #{assigns().inspect}"
+        end
+      end
+    end
+    
+   assert_do_move 3, Tte::Board::TILE_O
+   assert_do_move 1, Tte::Board::TILE_X
+   assert_do_move 4, Tte::Board::TILE_O
+   
+   #we have a winner!
+   assert_difference 'Tte::Turn.count' do
+     assert_difference 'ActionMailer::Base.deliveries.count', 2 do
+       get :move, {
+         :game_id=>@tte_game.to_param, 
+         :tte_game => {:square=>2, :player=>Tte::Board::TILE_X}}
+     end
+   end
+   assert assigns(:message).include?('Won'), "no winner!? #{assigns.inspect}"
+   #assert_do_move 4, Tte::Board::TILE_O, false
+
+  end
+  
+  test "tieing move" do
+    #just create a full board
+    @tte_game = Tte::Game.new
+    @tte_game.save!
+    @tte_turn = Tte::Turn.new({:board=> 43350, :game_id=>@tte_game.id, :number=>1})
+    @tte_turn.save!
+    
+    assert_difference 'Tte::Turn.count' do
+      assert_difference 'ActionMailer::Base.deliveries.count', 2 do
+        get :move, {
+          :game_id=>@tte_game.to_param, 
+          :tte_game => {:square=>8, :player=>Tte::Board::TILE_X}}
+        #raise Exception.new(Tte::Turn.all.inspect)
+      end
+    end
+    
+    assert assigns(:message).include?('Tie'), "no tie!? #{assigns.inspect}"
+
   end
 end

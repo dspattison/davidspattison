@@ -21,29 +21,11 @@ class Spaste::PastesControllerTest < ActionController::TestCase
       post :create, :spaste_paste => @spaste_paste.attributes
     end
 
-    assert_redirected_to spaste_paste_path(assigns(:spaste_paste))
+    #assert_redirected_to spaste_paste_path(assigns(:spaste_paste))
   end
 
   test "should show spaste_paste" do
     get :show, :id => @spaste_paste.to_param
     assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => @spaste_paste.to_param
-    assert_response :success
-  end
-
-  test "should update spaste_paste" do
-    put :update, :id => @spaste_paste.to_param, :spaste_paste => @spaste_paste.attributes
-    assert_redirected_to spaste_paste_path(assigns(:spaste_paste))
-  end
-
-  test "should destroy spaste_paste" do
-    assert_difference('Spaste::Paste.count', -1) do
-      delete :destroy, :id => @spaste_paste.to_param
-    end
-
-    assert_redirected_to spaste_pastes_path
   end
 end

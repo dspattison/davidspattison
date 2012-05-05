@@ -5,12 +5,6 @@ class UrlshortsControllerTest < ActionController::TestCase
     @urlshort = urlshorts(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:urlshorts)
-  end
-
   test "should get new" do
     get :new
     assert_response :success
