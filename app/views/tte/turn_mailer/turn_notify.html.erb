@@ -2,24 +2,25 @@
 <h1>Your Move against <%=h @other_player_name%></h1>
 <p>You are player <%= @current_player == Tte::Board::TILE_X ? 'X' : 'O'%></p>
 
-
-<table class="board-table" style="font-size:300%">
+<div class="board-div" style="font-size:300%">
 	<%i = 0%>
 	<%@board.nested_squares.each do |row|%>
-		<tr>
+		<div>
 			<% row.each do |cell|%>
-				<td style="padding:5px; <%= (i % 3) != 2 ? 'border-right: 3px solid black;' : ''%> <%= (i / 3) != 2 ? 'border-bottom:3px solid black;' : ''%>">
+				<span style="float:left; width: 75px;text-align: center; <%= (i % 3) != 2 ? 'border-right: 3px solid black;' : ''%> <%= (i / 3) != 2 ? 'border-bottom:3px solid black;' : ''%>">
 					<% if cell==0 %>
 						<%=link_to 'GO', tte_game_move_path(@tte_game, :only_path => false, :tte_game=>{:player=>@current_player, :square=>i}), :style=>'text-decoration:none'%>
 					<% else %>
 						<%=h cell == Tte::Board::TILE_X ? 'X' : 'O'%>
 					<% end %>
 					<% i = i+1 %>
-				</td>
+				</span>
 			<% end %>
-		</tr>
+			<div style="clear:both"></div>
+		</div>
 	<% end %>
 </table>
+
 <br/>
 
 <%=link_to(
