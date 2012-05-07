@@ -2,6 +2,7 @@
 <h1>Your Move against <%=h @other_player_name%></h1>
 <p>You are player <%= @current_player == Tte::Board::TILE_X ? 'X' : 'O'%></p>
 
+
 <table class="board-table" style="font-size:300%; border:2" border="2">
 	<%i = 0%>
 	<%@board.nested_squares.each do |row|%>
@@ -21,8 +22,11 @@
 </table>
 <br/>
 
-<h2>
-<%# block at end makes it disappear%>
-<%=link_to_if(@current_player == Tte::Board::TILE_X, 'Play Another Game', new_tte_game_path(:only_path => false, :tte_game=>{:player_a_email=>@tte_game.player_a_email, :player_b_email=>@tte_game.player_b_email})){}%>
-<%=link_to_if(@current_player == Tte::Board::TILE_O, 'Play Another Game', new_tte_game_path(:only_path => false, :tte_game=>{:player_a_email=>@tte_game.player_b_email, :player_b_email=>@tte_game.player_a_email})){}%>
-</h2>
+<%=link_to(
+	'Play Another Game', 
+	new_tte_game_path(
+		:only_path => false, 
+		:tte_game=>{
+			:player_a_email=>@other_player_name, 
+			:player_b_email=>@current_player_name}),
+	:style=>"background-color: #77D42A; border-radius: 13px; border: 5px solid #268A16; color: #306108; font-size: 21px; font-weight: bold; padding: 6px 20px;")%>
