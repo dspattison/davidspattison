@@ -116,6 +116,7 @@ class Tte::GamesController < ApplicationController
     
     player = params[:tte_game][:player].to_i
     square = params[:tte_game][:square].to_i
+    signature = params[:tte_game][:sig].to_s
     last_turn = nil
     
     if player == Tte::Board::TILE_X
@@ -144,6 +145,15 @@ class Tte::GamesController < ApplicationController
       render
       return
     end
+    
+    #do sig check
+    server_signature = get_move_hash(@tte_game.id, @current_player_email, square, last_turn.board)
+    if signature != server_signature
+      logger.error "Signature does not match provided client:[#{signature}] server:[#{server_signature}]"
+    else
+      logger.info "Signatures match!! [#{signature}]"
+    end
+    
     
     begin
       this_turn = perform_move @tte_game, last_turn, square, player

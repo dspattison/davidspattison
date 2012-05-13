@@ -1,5 +1,6 @@
 class Tte::TurnMailer < ActionMailer::Base
   default :from => "dspattison@gmail.com"
+  helper 'tte/games'
   
   def turn_notify tte_game, last_turn
     

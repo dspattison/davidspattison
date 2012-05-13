@@ -1,3 +1,6 @@
+# $Id$
+require "hasher/hasher_sha.rb"
+
 module Tte::GamesHelper
   
   # makes a move
@@ -41,6 +44,23 @@ module Tte::GamesHelper
     end
     
     this_turn
+  end
+  
+  
+  # gets a hash of the email addressed. 
+  # only reveal to intended recipant
+  # this is a permament "login" token
+  def get_email_hash email
+    hasher = Hasher::Sha.new
+    hasher.hash :tte_email_hash, email
+  end
+  
+  # gets a hash to determine authenticty of a move
+  # moves should only be considered valid if this secret  
+  # has been revealed
+  def get_move_hash game_id, email, square_id, last_board
+    hasher = Hasher::Sha.new
+    hasher.hash :tte_move_hash, game_id, email, square_id, last_board
   end
   
 end

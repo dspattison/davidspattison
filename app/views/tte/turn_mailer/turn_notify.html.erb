@@ -9,7 +9,19 @@
 			<% row.each do |cell|%>
 				<span style="float:left; width: 75px;text-align: center; <%= (i % 3) != 2 ? 'border-right: 3px solid black;' : ''%> <%= (i / 3) != 2 ? 'border-bottom:3px solid black;' : ''%>">
 					<% if cell==0 %>
-						<%=link_to 'GO', tte_game_move_path(@tte_game, :only_path => false, :tte_game=>{:player=>@current_player, :square=>i}), :style=>'text-decoration:none'%>
+						<%=link_to( 
+							'GO', 
+							tte_game_move_path(
+								@tte_game, 
+								:only_path => false, 
+								:tte_game=>{
+									:player=>@current_player, 
+									:square=>i,
+									:sig=>get_move_hash(@tte_game.id, @current_player_name, i, @board.board)
+								}
+							),
+							:style=>'text-decoration:none'
+						)%>
 					<% else %>
 						<%=h cell == Tte::Board::TILE_X ? 'X' : 'O'%>
 					<% end %>
