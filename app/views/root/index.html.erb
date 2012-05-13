@@ -7,12 +7,12 @@
 		<p>Here are some things I have built on this web scratchpad.</p>
 		<dl>
 			<dt><%= link_to "Tic-Tac-Email!", tte_games_path %></dt>
-			<dd><%=image_tag 'tte-game-won.svg', :style=>"float:left", :height=>'100', :width=>'100' %></dd>
+			<dd><%=link_to(image_tag('tte-game-won.svg', :style=>"float:left", :height=>'100', :width=>'100'), tte_games_path) %></dd>
 			<dd>First game for patt.us!</dd>
 			<dd>Turn based, two player, simple board game</dd>
 			<dd>Notifies each player via Email</dd>
 			<dd style="clear:left"></dd>
-		<dl>
+			
 			<dt><%= link_to "Url Shortner", urlshorts_path %></dt>
 			<dd>Classic 1 Table app</dd>
 			<dd>Had to do it with my new patt.us domain.</dd>
