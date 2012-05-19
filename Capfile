@@ -44,6 +44,6 @@ namespace :deploy do
   end
   
   task :render_keel do 
-    run "echo '<center>Updated on #{deploy_time} by #{deploy_user} #{`git describe --all`}</center> ' >> #{release_path}/app/views/shared/_keel.html.erb"
+    run "echo '<center>Updated on #{deploy_time} by #{deploy_user} #{`git ls-remote #{repository} HEAD|cut -b -40`.strip}</center> ' >> #{release_path}/app/views/shared/_keel.html.erb"
   end
 end
