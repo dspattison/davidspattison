@@ -25,6 +25,7 @@ namespace :deploy do
   task :default do
     update_code
     link_sqlite_db
+    copy_configs
     render_keel
     migrate
     symlink
@@ -41,6 +42,11 @@ namespace :deploy do
 
   task :migrate do
     #disabled
+  end
+  
+  desc "Copys config files from the shared folder into the config folder"
+  task :copy_configs do
+    run "cp #{shared_path}/config/juggernaut.yml #{current_release}/config/juggernaut.yml"
   end
   
   task :render_keel do 

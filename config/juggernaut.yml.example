@@ -1,0 +1,9 @@
+production:
+  # This is overwritten in production
+  # copies the file from #{SHARED_ROOT}/config/juggernaut.yml
+
+development:
+  foo: bar
+  
+test:
+  
