@@ -3,7 +3,12 @@ production:
   # copies the file from #{SHARED_ROOT}/config/juggernaut.yml
 
 development:
-  foo: bar
+  smpt_host:
+  smtp_user_name:
+  smtp_password:
   
 test:
+  smpt_host:
+  smtp_user_name:
+  smtp_password:
   
