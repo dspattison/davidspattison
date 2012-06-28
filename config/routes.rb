@@ -3,6 +3,7 @@ Davidspattison::Application.routes.draw do
   namespace :tte do 
     resources :games do
       match 'move', :action => :move
+      match 'restart', :action => :restart
     end
     #no longer using this cause it is a security hole 
     #resources :turns

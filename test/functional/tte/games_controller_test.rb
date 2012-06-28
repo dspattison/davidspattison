@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class Tte::GamesControllerTest < ActionController::TestCase
+  include Tte::GamesHelper
   setup do
     @tte_game = tte_games(:one)
   end
@@ -103,4 +104,70 @@ class Tte::GamesControllerTest < ActionController::TestCase
     assert assigns(:message).include?('Tie'), "no tie!? #{assigns.inspect}"
 
   end
+  
+  test "should restart game" do
+    
+    #just create a full board
+    @tte_game = Tte::Game.new({:player_a_email=>'a@patt.us', :player_b_email=>'b@patt.us'})
+    @tte_game.save!
+    @tte_turn = Tte::Turn.new({:board=> 43350, :game_id=>@tte_game.id, :number=>1})
+    @tte_turn.save!
+    
+    
+    assert_difference 'Tte::Turn.count' do
+      assert_difference 'ActionMailer::Base.deliveries.count', 1 do
+        get :restart, {
+          :game_id=>@tte_game.to_param, 
+          :tte_game => {
+            :square=>8, 
+            :current_player_email=>@tte_game.player_a_email,
+            :sig=>get_email_hash(@tte_game.player_a_email),
+          }
+        }
+        #raise Exception.new(Tte::Turn.all.inspect)
+      end
+    end
+    
+  end
+  
+  test "restart should complain about bad email" do
+    @tte_game = Tte::Game.new({:player_a_email=>'a@patt.us', :player_b_email=>'b@patt.us'})
+    @tte_game.save!
+    @tte_turn = Tte::Turn.new({:board=> 43350, :game_id=>@tte_game.id, :number=>1})
+    @tte_turn.save!
+    
+    assert_difference 'Tte::Turn.count', 0 do
+      assert_difference 'ActionMailer::Base.deliveries.count', 0 do 
+        get :restart, {
+          :game_id=>@tte_game.to_param, 
+          :tte_game => {
+            :square=>8, 
+            :current_player_email=>'not the correct email',
+            :sig=>get_email_hash(@tte_game.player_a_email),
+          }
+        }
+      end
+    end
+  end
+  
+  test "restart should fail on bad sig" do
+    @tte_game = Tte::Game.new({:player_a_email=>'a@patt.us', :player_b_email=>'b@patt.us'})
+    @tte_game.save!
+    @tte_turn = Tte::Turn.new({:board=> 43350, :game_id=>@tte_game.id, :number=>1})
+    @tte_turn.save!
+    
+    assert_difference 'Tte::Turn.count', 0 do
+      assert_difference 'ActionMailer::Base.deliveries.count', 0 do 
+        get :restart, {
+          :game_id=>@tte_game.to_param, 
+          :tte_game => {
+            :square=>8, 
+            :current_player_email=>@tte_game.player_a_email,
+            :sig=>'not vaild',
+          }
+        }
+      end
+    end
+  end
+  
 end

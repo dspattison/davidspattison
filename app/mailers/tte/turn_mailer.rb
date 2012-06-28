@@ -19,8 +19,10 @@ class Tte::TurnMailer < ActionMailer::Base
     
     @subject = "[tic-tac-email] Your Move against #{@other_player_name}"
     
+    #for compatibility with _new.html.erb/game_over
+    @current_player_email = @current_player_name
     
-    
+    logger.info "sending turn email"
     mail(:to => @current_player_name, :subject=>@subject) do |format|
        format.html
     end
