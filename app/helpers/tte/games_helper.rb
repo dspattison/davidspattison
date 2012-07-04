@@ -59,6 +59,7 @@ module Tte::GamesHelper
   # moves should only be considered valid if this secret  
   # has been revealed
   def get_move_hash game_id, email, square_id, last_board
+    #logger.info [:get_move_hash,  game_id, email, square_id, last_board].inspect
     hasher = Hasher::Sha.new
     hasher.hash :tte_move_hash, game_id, email, square_id, last_board
   end

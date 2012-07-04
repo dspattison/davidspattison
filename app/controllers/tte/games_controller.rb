@@ -211,6 +211,10 @@ class Tte::GamesController < ApplicationController
     server_signature = get_move_hash(@tte_game.id, @current_player_email, square, last_turn.board)
     if signature != server_signature
       logger.error "Signature does not match provided client:[#{signature}] server:[#{server_signature}]"
+      @message_class = 'warning'
+      @message = "Pay Income tax"
+      render
+      return
     else
       logger.info "Signatures match!! [#{signature}]"
     end

@@ -58,7 +58,18 @@ class Tte::GamesControllerTest < ActionController::TestCase
     
     def assert_do_move square, player, is_valid=true
       assert_difference(['Tte::Turn.count', 'ActionMailer::Base.deliveries.count']) do
-        get :move, {:game_id=>@tte_game.to_param, :tte_game => {:square=>square, :player=>player}}
+        get :move, {
+          :game_id=>@tte_game.to_param, 
+          :tte_game => {
+            :square=>square, 
+            :player=>player, 
+            :sig=>get_move_hash(
+              @tte_game.id, 
+              player == Tte::Board::TILE_X ? @tte_game.player_b_email : @tte_game.player_a_email, 
+              square, 
+              Tte::Turn.find_by_game_id(@tte_game.id, :order => "number DESC").board),
+          }
+        }
         assert assigns(:message), "no message!!?"
         if is_valid
           assert 'good' == assigns(:message_class), "message class is not good: #{assigns(:message_class)} #{assigns().inspect}"
@@ -77,7 +88,14 @@ class Tte::GamesControllerTest < ActionController::TestCase
      assert_difference 'ActionMailer::Base.deliveries.count', 2 do
        get :move, {
          :game_id=>@tte_game.to_param, 
-         :tte_game => {:square=>2, :player=>Tte::Board::TILE_X}}
+         :tte_game => {
+            :square=>2, 
+            :player=>Tte::Board::TILE_X,
+            :sig=>get_move_hash(
+              @tte_game.id, 
+              @tte_game.player_b_email, 
+              2, 
+              Tte::Turn.find_by_game_id(@tte_game.id, :order => "number DESC").board),}}
      end
    end
    assert assigns(:message).include?('Won'), "no winner!? #{assigns.inspect}"
@@ -87,7 +105,7 @@ class Tte::GamesControllerTest < ActionController::TestCase
   
   test "tieing move" do
     #just create a full board
-    @tte_game = Tte::Game.new
+    @tte_game = Tte::Game.new({:player_a_email=>'a@patt.us', :player_b_email=>'b@patt.us'})
     @tte_game.save!
     @tte_turn = Tte::Turn.new({:board=> 43350, :game_id=>@tte_game.id, :number=>1})
     @tte_turn.save!
@@ -96,7 +114,14 @@ class Tte::GamesControllerTest < ActionController::TestCase
       assert_difference 'ActionMailer::Base.deliveries.count', 2 do
         get :move, {
           :game_id=>@tte_game.to_param, 
-          :tte_game => {:square=>8, :player=>Tte::Board::TILE_X}}
+          :tte_game => {
+              :square=>8, 
+              :player=>Tte::Board::TILE_X,
+              :sig=>get_move_hash(
+                @tte_game.id, 
+                @tte_game.player_b_email, 
+                8, 
+                Tte::Turn.find_by_game_id(@tte_game.id, :order => "number DESC").board),}}
         #raise Exception.new(Tte::Turn.all.inspect)
       end
     end
