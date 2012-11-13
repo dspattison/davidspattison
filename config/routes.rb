@@ -1,5 +1,7 @@
 Davidspattison::Application.routes.draw do
 
+  get "fyf/search"
+
   namespace :tte do 
     resources :games do
       match 'move', :action => :move
