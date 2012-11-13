@@ -8,8 +8,8 @@ set :deploy_user, `whoami`.chomp!
 
 set :scm, :git
 set :application, "davidspattison" 
-#set :repository, 'git@github.com:dspattison/davidspattison.git'
-set :repository, 'git@git.davidspattison.com:davidspattison.git'
+set :repository, 'git@github.com:dspattison/davidspattison.git'
+#set :repository, 'git@git.davidspattison.com:davidspattison.git'
 
 #set :deploy_via, :remote_cache #keep files locally and do an update
 
