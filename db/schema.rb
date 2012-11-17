@@ -10,7 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120404033913) do
+ActiveRecord::Schema.define(:version => 20121113025520) do
+
+  create_table "facebook_users", :force => true do |t|
+    t.integer  "app_id",      :null => false
+    t.integer  "facebook_id", :null => false
+    t.string   "auth",        :null => false
+    t.string   "email",       :null => false
+    t.integer  "status",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "facebook_users", ["email"], :name => "index_facebook_users_on_email"
+  add_index "facebook_users", ["facebook_id", "app_id"], :name => "index_facebook_users_on_facebook_id_and_app_id", :unique => true
 
   create_table "spaste_pastes", :force => true do |t|
     t.text     "body"
