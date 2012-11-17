@@ -1,6 +1,13 @@
 Davidspattison::Application.routes.draw do
 
+  #get "oauth2/auth"
+
+  #get "oauth2/callback"
+
   get "fyf/search"
+  
+  get 'facebook/oauth2/auth'
+  get 'facebook/oauth2/callback'
 
   namespace :tte do 
     resources :games do
