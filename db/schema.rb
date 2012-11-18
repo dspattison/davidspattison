@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20121113025520) do
     t.integer  "facebook_id", :null => false
     t.string   "auth",        :null => false
     t.string   "email",       :null => false
+    t.string   "name"
     t.integer  "status",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"

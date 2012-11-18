@@ -13,7 +13,7 @@ gem 'redis', '2.2.2'
 
 gem 'prototype-rails', '3.1.0'
 
-gem 'oauth2', '0.8.0'
+gem 'fb_graph', '2.5.8'
 
 # Use unicorn as the web server
 # gem 'unicorn'
