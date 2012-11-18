@@ -69,7 +69,7 @@ class Facebook::Oauth2Controller < ApplicationController
   end
   
   def redirect_uri
-    "http://localhost:3000/facebook/oauth2/callback?app_id=#{app_id}"
+    url_for :action=>:callback, :app_id=> app_id, :only_path=>false
   end
 
 end
