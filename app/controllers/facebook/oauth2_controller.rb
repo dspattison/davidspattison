@@ -46,6 +46,7 @@ class Facebook::Oauth2Controller < ApplicationController
   private
   #returns the internal application number
   def app_id 
+    logger.info "facebook apps= #{Juggernaut[:facebook_app].inspect}"
     requested_app_id = params[:app_id]
     apps = Juggernaut[:facebook_app]
     if apps.has_key? requested_app_id
@@ -57,7 +58,7 @@ class Facebook::Oauth2Controller < ApplicationController
     end
     
     #just pick one
-    Juggernaut[:facebook_app].each do |k|
+    Juggernaut[:facebook_app].keys do |k|
       return k # return first key
     end
     logger.error 'NO APP_ID KNOWN!!'
@@ -69,7 +70,9 @@ class Facebook::Oauth2Controller < ApplicationController
   end
   
   def redirect_uri
-    url_for :action=>:callback, :app_id=> app_id, :only_path=>false
+    u = url_for :action=>:callback, :app_id=> app_id, :only_path=>false
+    logger.info "redirect_uri= #{u.inspect}"
+    u
   end
 
 end
