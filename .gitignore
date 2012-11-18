@@ -1,5 +1,5 @@
 .project
 Gemfile.lock
 config/juggernaut.yml
-db/
+db/*sqlite3
 log/
