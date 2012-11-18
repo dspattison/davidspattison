@@ -1,12 +1,10 @@
 Davidspattison::Application.routes.draw do
-
-  #get "oauth2/auth"
-
-  #get "oauth2/callback"
-
+  
   get "fyf/search"
   
   get 'facebook/oauth2/auth'
+  get 'facebook/oauth2/index'
+  match '/facebook/oauth2', :controller=> 'facebook/oauth2', :action=> :auth
   get 'facebook/oauth2/callback'
 
   namespace :tte do 

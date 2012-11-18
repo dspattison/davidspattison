@@ -1,5 +1,9 @@
 class Facebook::Oauth2Controller < ApplicationController
   
+  def index
+    auth #alias
+  end
+  
   def auth
     fb_auth = FbGraph::Auth.new(app_id, app_secret)
     
