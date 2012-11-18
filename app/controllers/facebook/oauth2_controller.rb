@@ -26,15 +26,12 @@ class Facebook::Oauth2Controller < ApplicationController
     #test that it works
     user_info = FbGraph::User.me(access_token).fetch # => FbGraph::User
     
-    fbuser = Facebook::User.find_by_facebook_id(user_info.id)
+    fbuser = Facebook::User.find_by_facebook_id(user_info.identifier)
     if fbuser.nil?
       fbuser = Facebook::User.new(
       {
         :app_id => INTERNAL_APP_ID,
-        :facebook_id => user_info.id,
-        # :email => user_info.email,
-        # :name => user_info.name,
-        # :auth => access_token.to_s,
+        :facebook_id => user_info.identifier,
         :status => 1,
       })
     end
@@ -44,9 +41,7 @@ class Facebook::Oauth2Controller < ApplicationController
     fbuser.auth = access_token.to_s
     
     fbuser.save
-    respond_to do |format|
-      format.html # new.html.erb
-    end
+    redirect_to fyf_search_url(:access_token => access_token.to_s)
   end
 
 end

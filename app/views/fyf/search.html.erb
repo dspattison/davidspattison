@@ -1,2 +1,26 @@
 <h1>Fyf#search</h1>
-<p>Find me in app/views/fyf/search.html.erb</p>
+
+<table>
+  <th>
+  	<th colspan=4>Play Now
+  </th>
+  <%@friends_local.each do |f| %>
+  	<tr>
+  		<td><img src="<%=h f.picture%>"/></td>
+  		<td><%=h f.name%></td>
+  		<td><%=h f.email%></td>
+  		<td><%=h f.identifier%></td>
+  	</tr>
+  <%end%>
+  <th>
+  	<th colspan=4>Invite
+  </th>
+  <%@friends_other.each do |f| %>
+  	<tr>
+  		<td><img src="<%=h f.picture%>"/></td>
+  		<td><%=h f.name%></td>
+  		<td><%=h f.email%></td>
+  		<td><%=h f.identifier%></td>
+  	</tr>
+  <%end%>
+</table>
