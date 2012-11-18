@@ -6,6 +6,14 @@ development:
   smpt_host:
   smtp_user_name:
   smtp_password:
+  facebook_app:
+    # hash of app_id=> secret
+    # testpattus
+    294194040700417: 3bbc4ce31200e74ed580c55cb8667f28
+    # testpattustwo
+    455567867822673: 29a0af174ed6a848f7fdf7c8d16a0176
+    
+  facebook_app_primary: 294194040700417
   
 test:
   smpt_host:

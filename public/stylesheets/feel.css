@@ -41,3 +41,32 @@ a {
 	color: #333;
 }
 
+.big {
+	font-size: 150%;
+}
+
+.bigger {
+	font-size: 200%;
+}
+
+.small {
+	font-size: 75%;
+}
+
+.smaller {
+	font-size: 50%;
+}
+
+
+.button-clickme {
+	background-color: #77D42A;
+	border-radius: 13px;
+	border: 5px solid #268A16;
+	color: #306108;
+	font-size: 21px;
+	font-weight: bold;
+	padding: 6px 20px;
+}
+.button-clickme:hover {
+	background-color: #78D52B;
+}

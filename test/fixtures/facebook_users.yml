@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  app_id: 1
+  facebook_id: 1
+  auth: MyString
+  email: d@patt.us
+  status: 1 
+
+two:
+  app_id: 1
+  facebook_id: 2 
+  auth: MyString
+  email: p@patt.us
+  status: 1
