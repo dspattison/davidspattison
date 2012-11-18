@@ -1,24 +1,22 @@
 class Facebook::Oauth2Controller < ApplicationController
-  APP_ID = '294194040700417'
-  APP_SECRET = '06e23e48c0c64239d364472589324e2a'
-  INTERNAL_APP_ID = 1
+  
   def auth
-    fb_auth = FbGraph::Auth.new(APP_ID, APP_SECRET)
+    fb_auth = FbGraph::Auth.new(app_id, app_secret)
     
     client = fb_auth.client
-    client.redirect_uri = "http://localhost:3000/facebook/oauth2/callback"
+    client.redirect_uri = redirect_uri
 
     # redirect user to facebook
     redirect_to client.authorization_uri(
-      :scope => [:email, :read_stream, :offline_access]
+      :scope => [:email]
     )
     
   end
 
   def callback
-    fb_auth = FbGraph::Auth.new(APP_ID, APP_SECRET)
+    fb_auth = FbGraph::Auth.new(app_id, app_secret)
     client = fb_auth.client
-    client.redirect_uri = "http://localhost:3000/facebook/oauth2/callback"
+    client.redirect_uri = redirect_uri
     client.authorization_code = params[:code]
     logger.info client.inspect
     access_token = client.access_token! :client_auth_body # => Rack::OAuth2::AccessToken
@@ -30,7 +28,7 @@ class Facebook::Oauth2Controller < ApplicationController
     if fbuser.nil?
       fbuser = Facebook::User.new(
       {
-        :app_id => INTERNAL_APP_ID,
+        :app_id => app_id,
         :facebook_id => user_info.identifier,
         :status => 1,
       })
@@ -42,6 +40,36 @@ class Facebook::Oauth2Controller < ApplicationController
     
     fbuser.save
     redirect_to fyf_search_url(:access_token => access_token.to_s)
+  end
+  
+  
+  private
+  #returns the internal application number
+  def app_id 
+    requested_app_id = params[:app_id]
+    apps = Juggernaut[:facebook_app]
+    if apps.has_key? requested_app_id
+      return requested_app_id
+    end
+    # miss, go to primary
+    if Juggernaut[:facebook_app_primary]
+      return Juggernaut[:facebook_app_primary] 
+    end
+    
+    #just pick one
+    Juggernaut[:facebook_app].each do |k|
+      return k # return first key
+    end
+    logger.error 'NO APP_ID KNOWN!!'
+    nil 
+  end
+  
+  def app_secret
+    Juggernaut[:facebook_app][app_id]
+  end
+  
+  def redirect_uri
+    "http://localhost:3000/facebook/oauth2/callback?app_id=#{app_id}"
   end
 
 end

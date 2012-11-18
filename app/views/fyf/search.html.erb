@@ -2,25 +2,23 @@
 
 <table>
   <th>
-  	<th colspan=4>Play Now
+  	<th colspan=5>Play Now
   </th>
-  <%@friends_local.each do |f| %>
+  <%@friends_local.each do |local_user, fb_user| %>
   	<tr>
-  		<td><img src="<%=h f.picture%>"/></td>
-  		<td><%=h f.name%></td>
-  		<td><%=h f.email%></td>
-  		<td><%=h f.identifier%></td>
+  		<td><img src="<%=h fb_user.picture%>"/></td>
+  		<td class='bigger'><%=h fb_user.name%></td>
+  		<td><%=link_to 'Play', tte_games_path({:tte_game=>{:player_a_email=>local_user.email, :player_b_email => @me.email}}), :class=>'button-clickme' %></td>
   	</tr>
   <%end%>
   <th>
-  	<th colspan=4>Invite
+  	<th colspan=5>Invite
   </th>
   <%@friends_other.each do |f| %>
   	<tr>
   		<td><img src="<%=h f.picture%>"/></td>
-  		<td><%=h f.name%></td>
-  		<td><%=h f.email%></td>
-  		<td><%=h f.identifier%></td>
+  		<td class='bigger'><%=h f.name%></td>
+  		<td><a href='#' class="button-clickme">Invite</a></td>
   	</tr>
   <%end%>
 </table>
