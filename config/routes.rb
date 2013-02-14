@@ -4,11 +4,13 @@ Davidspattison::Application.routes.draw do
     resources :games do
       match 'move', :action => :move
     end
-    #no longer using this cause it is a security hole 
-    #resources :turns
-    
-    
   end
+  
+  #this is used mostly for SEO, no links should use this directly, yet
+  constraints :domain => /.*tic-tac-toe\.us.*/ do
+    resources :games, :path => '', :controller => 'tte/games'
+  end
+  
   
 
   resources :urlshorts
