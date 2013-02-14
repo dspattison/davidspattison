@@ -31,15 +31,11 @@
 			<div style="clear:both"></div>
 		</div>
 	<% end %>
-</table>
+</div>
 
 <br/>
 
-<%=link_to(
-	'Play Another Game', 
-	new_tte_game_path(
-		:only_path => false, 
-		:tte_game=>{
-			:player_a_email=>@other_player_name, 
-			:player_b_email=>@current_player_name}),
-	:style=>"background-color: #77D42A; border-radius: 13px; border: 5px solid #268A16; color: #306108; font-size: 21px; font-weight: bold; padding: 6px 20px;")%>
+
+<%=render :partial => 'new' %>
+
+

@@ -1,0 +1,41 @@
+<br/>
+
+<%= link_to(
+	'Play Another Game', 
+	new_tte_game_path(
+		:only_path => false, 
+		:tte_game=>{
+			:player_a_email=>@other_player_name, 
+			:player_b_email=>@current_player_name}),
+	:style=>"background-color: #77D42A; border-radius: 13px; border: 5px solid #268A16; color: #306108; font-size: 21px; font-weight: bold; padding: 6px 20px;")%>
+
+<br/>
+
+<p>Tip: Going first gives you a better chance of winning.</p>
+
+<table style="font-size:300%; border:2" border="2">
+	<%i = 0%>
+	<%Tte::Board.new(0).nested_squares.each do |row|%>
+		<tr>
+			<% row.each do |cell|%>
+				<td>
+					<%=link_to( 
+						'GO', 
+						tte_game_restart_path(
+							@tte_game, 
+							:only_path => false, 
+							:tte_game=>{
+								:current_player_email=>@current_player_email, 
+								:square=>i,
+								:sig=>get_email_hash(@current_player_email)
+							}
+						),
+						:style=>'text-decoration:none'
+					)%>
+				</td>
+				<% i=i+1 %>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+

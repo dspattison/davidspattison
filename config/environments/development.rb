@@ -27,13 +27,7 @@ Davidspattison::Application.configure do
 
   #same as prod
   ActionMailer::Base.delivery_method = :smtp
-
-  ActionMailer::Base.smtp_settings = {
-    :address        => "email-smtp.us-east-1.amazonaws.com",
-    :port           => 587,
-    :authentication => :plain,
-    :user_name      => "AKIAIOYLMDYCBYMDMIJQ",
-    :password       => "Aqn3es0FyjpMwnyl2sArgEkiv6iOvVYEZj4H9o0upl6i"
-  }
+  #more smtp settings are in smtp.rb
+  
 end
 

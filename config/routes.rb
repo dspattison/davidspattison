@@ -1,8 +1,16 @@
 Davidspattison::Application.routes.draw do
+  
+  get "fyf/search"
+  
+  get 'facebook/oauth2/auth'
+  get 'facebook/oauth2/index'
+  match '/facebook/oauth2', :controller=> 'facebook/oauth2', :action=> :auth
+  get 'facebook/oauth2/callback'
 
   namespace :tte do 
     resources :games do
       match 'move', :action => :move
+      match 'restart', :action => :restart
     end
   end
   

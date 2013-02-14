@@ -65,6 +65,67 @@ class Tte::GamesController < ApplicationController
       end
     end
   end
+  
+  # GET /tte/games/1/restart
+  def restart
+    #default vars. used if execption
+    @tte_game = Tte::Game.new 
+    @board = Tte::Board.new 0
+    
+    @old_tte_game = Tte::Game.find(params[:game_id])
+    
+    logger.debug @old_tte_game.inspect
+    
+    @current_player_email = params[:tte_game][:current_player_email]
+    if @old_tte_game.player_a_email == @current_player_email
+      @other_player_email = @old_tte_game.player_b_email
+    elsif @old_tte_game.player_b_email == @current_player_email
+      @other_player_email = @old_tte_game.player_a_email
+    else
+      @message_class = 'amber'
+      @message = 'You have won second prize in a beauty contest, collect $10.'
+      render 'new'
+      return
+    end
+    
+    #do sig check
+    server_signature = get_email_hash(@current_player_email)
+    signature = params[:tte_game][:sig].to_s
+    if signature != server_signature
+      logger.error "Signature does not match provided client:[#{signature}] server:[#{server_signature}]"
+      @message_class = 'amber'
+      @message = 'go to jail, do not pass go, do not collect 200 dollars'
+      render 'new'
+      return
+    else
+      logger.info "Signatures match!! [#{signature}]"
+    end 
+    
+    @tte_game = Tte::Game.new(:player_b_email=>@current_player_email, :player_a_email=>@other_player_email)
+    
+    @board = Tte::Board.new 0
+    
+    #copied from create :(
+    success = true
+    @tte_game.save! or success = false
+    begin
+      success and perform_move @tte_game, nil, params[:square].to_i, Tte::Board::TILE_X
+    rescue Exception=>ex
+      logger.error ex.inspect
+      success = false
+    end
+    
+    respond_to do |format|
+      if success
+        format.html { redirect_to @tte_game, :notice => 'Game was successfully created.' }
+        format.json { render :json => @tte_game, :status => :created, :location => @tte_game }
+      else
+        format.html { render :action => "new" }
+        format.json { render :json => @tte_game.errors, :status => :unprocessable_entity }
+      end
+    end
+    
+  end
 
   # PUT /tte/games/1
   # PUT /tte/games/1.json
@@ -150,6 +211,10 @@ class Tte::GamesController < ApplicationController
     server_signature = get_move_hash(@tte_game.id, @current_player_email, square, last_turn.board)
     if signature != server_signature
       logger.error "Signature does not match provided client:[#{signature}] server:[#{server_signature}]"
+      @message_class = 'warning'
+      @message = "Pay Income tax"
+      render
+      return
     else
       logger.info "Signatures match!! [#{signature}]"
     end

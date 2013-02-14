@@ -24,7 +24,7 @@ module Tte::GamesHelper
     this_turn = Tte::Turn.new({:game_id=>tte_game.id, :number=>turn_number, :board => @board.board})
     this_turn.save!
     
-    
+    logger.info "Game over status; #{@board.game_over?.inspect}"
     if !@board.game_over?
       begin
         Tte::TurnMailer.turn_notify(@tte_game, this_turn).deliver
@@ -59,6 +59,7 @@ module Tte::GamesHelper
   # moves should only be considered valid if this secret  
   # has been revealed
   def get_move_hash game_id, email, square_id, last_board
+    #logger.info [:get_move_hash,  game_id, email, square_id, last_board].inspect
     hasher = Hasher::Sha.new
     hasher.hash :tte_move_hash, game_id, email, square_id, last_board
   end
