@@ -1,6 +1,9 @@
 <h1>Play Tic-Tac-Email!</h1>
+<%=image_tag('tte-game-won.svg', :style=>"", :height=>'100', :width=>'100')%>
 
 <h3 class="<%=h @message_class%>"><%=h @message%></h3>
+
+<h4><%= link_to 'Find Friends for Tic-Tac-Email!', facebook_oauth2_path %></h4>
 
 <%= render 'form' %>
 
