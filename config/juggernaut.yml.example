@@ -13,6 +13,11 @@ development:
     # testpattustwo
     455567867822673: 29a0af174ed6a848f7fdf7c8d16a0176
     
+  #hash of facebook app's hostname to use
+  facebook_app_host:
+    294194040700417: localhost
+    455567867822673: localhost
+    
   facebook_app_primary: 294194040700417
   
 test:

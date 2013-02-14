@@ -73,8 +73,12 @@ class Facebook::Oauth2Controller < ApplicationController
     Juggernaut[:facebook_app][app_id]
   end
   
+  def app_host
+    Juggernaut[:facebook_app_host][app_id]
+  end
+  
   def redirect_uri
-    u = url_for :action=>:callback, :app_id=> app_id, :only_path=>false
+    u = url_for :action=>:callback, :app_id=> app_id, :only_path=>false, :host => app_host
     logger.info "redirect_uri= #{u.inspect}"
     u
   end
