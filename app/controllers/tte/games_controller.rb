@@ -1,5 +1,6 @@
 class Tte::GamesController < ApplicationController
   include Tte::GamesHelper
+  
   # GET /tte/games
   # GET /tte/games.json
   def index
@@ -248,4 +249,11 @@ class Tte::GamesController < ApplicationController
     @message ="Turn completed"
     render 
   end
+  
+  private
+  
+  def set_title
+      @page_title = 'Play Tic-Tac-Toe!'
+  end
+  
 end
