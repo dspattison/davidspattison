@@ -15,7 +15,9 @@ Davidspattison::Application.routes.draw do
   end
   
   #this is used mostly for SEO, no links should use this directly, yet
-  constraints :domain => /.*tic-tac-toe\.us.*/ do
+  #using :host instead of :domain so ip-based hosts will work
+  #https://github.com/rails/rails/issues/3800
+  constraints :host => /.*tic-tac-toe\.us.*/ do
     resources :games, :path => '', :controller => 'tte/games'
   end
   
