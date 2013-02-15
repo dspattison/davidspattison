@@ -4,7 +4,7 @@
 
 <h3 class="<%=h @message_class%>"><%=h @message%></h3>
 
-<h4><%= link_to 'Find Friends for Tic-Tac-Email!', facebook_oauth2_path %></h4>
+<%= link_to 'Find Friends for Tic-Tac-Email!', facebook_oauth2_path, :class=> 'button-clickme'%>
 
 <%= render 'form' %>
 

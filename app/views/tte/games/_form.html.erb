@@ -1,4 +1,4 @@
-<%= form_for(@tte_game) do |f| %>
+<%= form_for(@tte_game, :html=>{:class=>'tte-form big'}) do |f| %>
   <% if @tte_game.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@tte_game.errors.count, "error") %> prohibited this tte_game from being saved:</h2>
@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label "Your Opponent's email address:" %><br />
-    <%= f.text_field :player_a_email %>
+    <%= f.text_field :player_a_email, :type=>:email %>
   </div>
   <div class="field">
     <%= f.label "Your email address:" %><br />
-    <%= f.text_field :player_b_email %>
+    <%= f.text_field :player_b_email, :type=>:email %>
   </div>
   
   <div class="field">
@@ -26,6 +26,6 @@
   </div>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Start Game', :class=>'button-clickme' %>
   </div>
 <% end %>

@@ -66,6 +66,8 @@ a {
 	font-size: 21px;
 	font-weight: bold;
 	padding: 6px 20px;
+	display: inline-block;
+	cursor: pointer;
 }
 .button-clickme:hover {
 	background-color: #78D52B;

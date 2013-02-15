@@ -18,3 +18,8 @@
 .board-table td.tte-square:last-of-type{ 
 	border-right: none;
 }
+
+.tte-form input[type=email] {
+	font-size: 200%;
+	max-width:100%;
+}
