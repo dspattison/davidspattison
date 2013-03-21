@@ -1,5 +1,5 @@
 = About
-This is david pattison's personal website code.  see the home page for more info.
+This is David Pattison's personal website code.  see the home page for more info.
 
 https://patt.us
 
@@ -18,3 +18,9 @@ rails s
 
 you need to have this app config file in place:
 ln -s $(pwd)/config/juggernaut.yml.example config/juggernaut.yml
+
+== Deploying
+gem install capistrano -v 2.8.0
+set up your .ssh/config file to use the correct key/username
+cap deploy
+
