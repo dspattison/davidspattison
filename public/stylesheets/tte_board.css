@@ -23,3 +23,10 @@
 	font-size: 200%;
 	max-width:100%;
 }
+
+
+.tte-logo {
+	float:left;
+	display:inline;
+	margin-right: 10px;
+}

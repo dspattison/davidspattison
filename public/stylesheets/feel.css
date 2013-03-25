@@ -72,3 +72,7 @@ a {
 .button-clickme:hover {
 	background-color: #78D52B;
 }
+
+.clear {
+	clear:both;
+}

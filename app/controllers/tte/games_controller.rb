@@ -256,4 +256,8 @@ class Tte::GamesController < ApplicationController
       @page_title = 'Play Tic-Tac-Toe!'
   end
   
+  def set_html_title
+    @page_html_title = ''
+  end
+  
 end
