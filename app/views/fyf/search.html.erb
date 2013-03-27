@@ -8,7 +8,7 @@
   	<tr>
   		<td><img src="<%=h fb_user.picture%>"/></td>
   		<td class='bigger'><%=h fb_user.name%></td>
-  		<td><%=link_to 'Play', tte_games_path({:tte_game=>{:player_a_email=>local_user.email, :player_b_email => @me.email}}), :class=>'button-clickme' %></td>
+  		<td><%=link_to 'Play', tte_games_path({:tte_game=>{:player_a_email=>local_user.email, :player_b_email => @me.email}})+'#move', :class=>'button-clickme' %></td>
   	</tr>
   <%end%>
   <th>
