@@ -3,3 +3,4 @@ Gemfile.lock
 config/juggernaut.yml
 db/*sqlite3
 log/
+tmp/
