@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Player a email:</b>
+  <%= @c4_game.player_a_email %>
+</p>
+
+<p>
+  <b>Player b email:</b>
+  <%= @c4_game.player_b_email %>
+</p>
+
+<p>
+  <b>Board:</b>
+  <%= @c4_game.board %>
+</p>
+
+
+<%= link_to 'Edit', edit_c4_game_path(@c4_game) %> |
+<%= link_to 'Back', c4_games_path %>

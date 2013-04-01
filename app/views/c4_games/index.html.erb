@@ -1,0 +1,27 @@
+<h1>Listing c4_games</h1>
+
+<table>
+  <tr>
+    <th>Player a email</th>
+    <th>Player b email</th>
+    <th>Board</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @c4_games.each do |c4_game| %>
+  <tr>
+    <td><%= c4_game.player_a_email %></td>
+    <td><%= c4_game.player_b_email %></td>
+    <td><%= c4_game.board %></td>
+    <td><%= link_to 'Show', c4_game %></td>
+    <td><%= link_to 'Edit', edit_c4_game_path(c4_game) %></td>
+    <td><%= link_to 'Destroy', c4_game, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New C4 game', new_c4_game_path %>

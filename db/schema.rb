@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113025520) do
+ActiveRecord::Schema.define(:version => 20130401012612) do
+
+  create_table "c4_games", :force => true do |t|
+    t.string   "player_a_email"
+    t.string   "player_b_email"
+    t.integer  "board"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "facebook_users", :force => true do |t|
     t.integer  "app_id",      :null => false

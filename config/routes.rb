@@ -1,5 +1,7 @@
 Davidspattison::Application.routes.draw do
   
+  resources :c4_games
+
   get "fyf/search"
   
   get 'facebook/oauth2/auth'
