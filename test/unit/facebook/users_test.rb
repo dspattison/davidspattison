@@ -7,16 +7,16 @@ class Facebook::UsersTest < ActiveSupport::TestCase
       {
         :email=>'a@b.com',
         :app_id => 1,
-        :facebook_id => 1,
-        :auth => 1,
+        :facebook_id => 13,
+        :auth => "1",
+        :name => "1",
         :status=>1,
         
       }
     )
-    assert x.save
-    puts x.inspect
+    assert x.save!
     
     y = Facebook::User.find_by_email('a@b.com')
-    assert y.facebook_id == 1
+    assert y.facebook_id == 13
   end
 end
