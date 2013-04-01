@@ -1,6 +1,9 @@
 Davidspattison::Application.routes.draw do
   
-  resources :c4_games
+  namespace :c4 do
+    resources :games
+  end
+  
 
   get "fyf/search"
   

@@ -1,8 +1,8 @@
-class C4GamesController < ApplicationController
+class C4::GamesController < ApplicationController
   # GET /c4_games
   # GET /c4_games.json
   def index
-    @c4_games = C4Game.all
+    @c4_games = C4::Game.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class C4GamesController < ApplicationController
   # GET /c4_games/1
   # GET /c4_games/1.json
   def show
-    @c4_game = C4Game.find(params[:id])
+    @c4_game = C4::Game.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class C4GamesController < ApplicationController
   # GET /c4_games/new
   # GET /c4_games/new.json
   def new
-    @c4_game = C4Game.new
+    @c4_game = C4::Game.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class C4GamesController < ApplicationController
 
   # GET /c4_games/1/edit
   def edit
-    @c4_game = C4Game.find(params[:id])
+    @c4_game = C4::Game.find(params[:id])
   end
 
   # POST /c4_games
   # POST /c4_games.json
   def create
-    @c4_game = C4Game.new(params[:c4_game])
+    @c4_game = C4::Game.new(params[:c4_game])
 
     respond_to do |format|
       if @c4_game.save
@@ -56,7 +56,7 @@ class C4GamesController < ApplicationController
   # PUT /c4_games/1
   # PUT /c4_games/1.json
   def update
-    @c4_game = C4Game.find(params[:id])
+    @c4_game = C4::Game.find(params[:id])
 
     respond_to do |format|
       if @c4_game.update_attributes(params[:c4_game])
@@ -72,7 +72,7 @@ class C4GamesController < ApplicationController
   # DELETE /c4_games/1
   # DELETE /c4_games/1.json
   def destroy
-    @c4_game = C4Game.find(params[:id])
+    @c4_game = C4::Game.find(params[:id])
     @c4_game.destroy
 
     respond_to do |format|
