@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class C4GamesControllerTest < ActionController::TestCase
+class C4::GamesControllerTest < ActionController::TestCase
   setup do
     @c4_game = c4_games(:one)
   end
@@ -17,7 +17,7 @@ class C4GamesControllerTest < ActionController::TestCase
   end
 
   test "should create c4_game" do
-    assert_difference('C4Game.count') do
+    assert_difference('C4::Game.count') do
       post :create, :c4_game => @c4_game.attributes
     end
 
@@ -40,7 +40,7 @@ class C4GamesControllerTest < ActionController::TestCase
   end
 
   test "should destroy c4_game" do
-    assert_difference('C4Game.count', -1) do
+    assert_difference('C4::Game.count', -1) do
       delete :destroy, :id => @c4_game.to_param
     end
 
