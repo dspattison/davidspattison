@@ -63,7 +63,7 @@ class C4::BoardTest < ActiveSupport::TestCase
   
   test "compute simple winner" do
     b = C4::Board.new 18014398509481984
-    puts b.columns.inspect
+    # puts b.columns.inspect
     assert b.has_winner?
     assert_equal C4::Board::A, b.winner
   end
