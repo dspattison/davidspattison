@@ -31,18 +31,20 @@ class C4::Board
   end
   
   def valid_column?(column_id)
-    return [0..6].include? column_id
+    return [0, 1, 2, 3, 4 ,5, 6].include? column_id
   end
   
   def move!(column_id)
-    #raise Exception.new("Invalid move") if !legal_move?(column_id)
+    raise Exception.new("Invalid move, #{column_id.inspect}") unless legal_move?(column_id)
     
     @columns[column_id].each_with_index do |r, i|
       if r == EMPTY
-        @columns[column_id][i] == next_player
+        @columns[column_id][i] = next_player
+        break
       end
     end
     compute_board #fix the int
+    compute_winner
   end
   
   
@@ -56,8 +58,9 @@ class C4::Board
       end
     end
     
-    return B if a_tiles = b_tiles
-    return A
+    # puts "a_tiles #{a_tiles} b_tiles #{b_tiles}"
+    return A if a_tiles == b_tiles
+    return B
   end
   
   def has_winner?
@@ -82,25 +85,28 @@ class C4::Board
   
   private
   
+  #broken
   def compute_board
     @board = 0
     @columns.each do |c|
       filled_rows=0
       c.each do |r|
-        filled_rows += r == EMPTY ? 1 : 0
+        filled_rows += (r == EMPTY ? 0 : 1)
       end
       
       column_value = 0
       
       filled_rows.times do |i|
-        column_value += c[i] == B ? 1 : 0# 1 if B
+        column_value += (c[i] == B) ? 1 : 0# 1 if B
         column_value = column_value << 1 #move up one bit
       end
       
-      @board << 3
-      @board += filled_rows
-      @board << 6
-      @board += column_value
+      # puts "c: #{c.inspect}, filled_rows: #{filled_rows}, column_value: #{column_value}, b: #{@board}"
+      
+      @board += (filled_rows & 9)
+      @board <<= 3
+      @board += (column_value & 63)
+      @board <<= 6
     end
     @board
   end

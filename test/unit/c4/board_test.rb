@@ -12,8 +12,10 @@ class C4::BoardTest < ActiveSupport::TestCase
     assert !b.legal_move?('adgas')
     
     (0..6).each do |i|
-      assert !b.legal_move?(i)
+      assert b.legal_move?(i)
     end
+    
+    assert C4::Board::A, b.next_player
   end
   
   test "compute columns 1" do
@@ -68,16 +70,24 @@ class C4::BoardTest < ActiveSupport::TestCase
     assert_equal C4::Board::A, b.winner
   end
   
-  # test "moves" do
-    # b = C4::Board.new 576460752303423488 #move in far left column
+  test "moves" do
+    b = C4::Board.new 0 #move in far left column
     # puts b.columns.inspect
     # puts b.board
-#     
-    # b.move! 1
-    # puts b.columns.inspect
-    # puts b.board
-#     
-  # end
+    
+    [1,2,1,2,1,2].each_with_index do |column_id, i|
+      b.move!(column_id)
+      # b = C4::Board.new b.board #re-serialize
+      # puts b.columns.inspect
+      # puts b.board
+      assert !b.has_winner?
+      
+    end
+    b.move! 1
+    assert b.has_winner?
+    assert_equal C4::Board::A, b.winner
+    
+  end
   
 end
  
