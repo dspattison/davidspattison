@@ -26,6 +26,39 @@ class C4::BoardTest < ActiveSupport::TestCase
     #puts b.columns.inspect
     assert_equal C4::Board::A, b.columns[0][0], b.columns.inspect
     assert_equal C4::Board::B, b.columns[1][0], b.columns.inspect 
+    
+    #test serializing
+    assert_equal b.board, C4::Board.new(b.board).board
+  end
+  
+  test "compute columns 3" do
+    # A in col 0
+    # B in col 1
+    # A in col 6
+    b = C4::Board.new 2305843009213693952+4573968371548160 +192
+    # puts b.columns.inspect
+    assert_equal C4::Board::A, b.columns[0][0], b.columns.inspect
+    assert_equal C4::Board::B, b.columns[1][0], b.columns.inspect
+    assert_equal C4::Board::A, b.columns[6][0], b.columns.inspect
+    
+    #test serializing
+    assert_equal b.board, C4::Board.new(b.board).board
+  end
+  
+  test "compute columns 4" do
+    # A in col 0
+    # B in col 1
+    # A in col 6
+    # B in col 1
+    b = C4::Board.new 2305843009213693952 + 31454828647415808 + 192 
+    # puts b.columns.inspect
+    assert_equal C4::Board::A, b.columns[0][0], b.columns.inspect
+    assert_equal C4::Board::B, b.columns[1][0], b.columns.inspect
+    assert_equal C4::Board::B, b.columns[1][1], b.columns.inspect
+    assert_equal C4::Board::A, b.columns[6][0], b.columns.inspect
+    
+    #test serializing
+    assert_equal b.board, C4::Board.new(b.board).board
   end
   
   # test "moves" do

@@ -103,10 +103,14 @@ class C4::Board
     (0..6).each do |c|
       
       row = [EMPTY] * 6
+      #top 3 bits, integer
       filled_rows = (columns >> 61) & 7
+      #puts "column bits: #{(columns >> 55) & 63}"
       
       filled_rows.times do |i|
-        row[i] = ((columns >> 55-i) & 1) + 1
+        #top bits, 3-9, sequential; add one to offset A vs B
+        #puts "filled_rows: #{filled_rows}; #{i}: #{(columns >> 55-i) & 1} #{((columns >> 55-i) & 1) + 1}"
+        row[i] = ((columns >> 55+i) & 1) + 1
       end
       @columns << row
       columns = columns << 9 #iterate!
