@@ -21,7 +21,7 @@ class C4::Board
   def initialize(board)
     @board = board
     compute_columns @board
-    @winner = compute_winner 
+    compute_winner 
   end
   
   def legal_move?(column_id)
@@ -47,11 +47,21 @@ class C4::Board
   
   
   def next_player
-    B # todo
+    #we will figure this out by counting the number of A vs B tiles
+    a_tiles = b_tiles = 0
+    @columns.each do |c|
+      c.each do |r|
+        a_tiles +=1 if r == A
+        b_tiles +=1 if r == B
+      end
+    end
+    
+    return B if a_tiles = b_tiles
+    return A
   end
   
   def has_winner?
-    
+    return @winner != nil
   end
   
   def game_over?
@@ -118,6 +128,14 @@ class C4::Board
   end
   
   def compute_winner
-    
+    @winner = nil
+    #for now, just compute a complete column
+    @columns.each do |c|
+      if c[0] != EMPTY and c[0] == c[1] and c[0] == c[2] and c[0] == c[3]
+        # puts "winner: #{c[0]}"
+        @winner = c[0]
+        return
+      end
+    end
   end
 end

@@ -61,6 +61,13 @@ class C4::BoardTest < ActiveSupport::TestCase
     assert_equal b.board, C4::Board.new(b.board).board
   end
   
+  test "compute simple winner" do
+    b = C4::Board.new 18014398509481984
+    puts b.columns.inspect
+    assert b.has_winner?
+    assert_equal C4::Board::A, b.winner
+  end
+  
   # test "moves" do
     # b = C4::Board.new 576460752303423488 #move in far left column
     # puts b.columns.inspect
