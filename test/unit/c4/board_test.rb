@@ -63,6 +63,7 @@ class C4::BoardTest < ActiveSupport::TestCase
     b2 = C4::Board.new b.board #re-serialize
     # puts b2.columns.inspect
     assert_equal b.board, b2.board, "Serialized board does not match"
+    assert_equal b.columns, b2.columns, "@columns do not match"
   end
   
   test "compute simple winner" do
@@ -78,15 +79,15 @@ class C4::BoardTest < ActiveSupport::TestCase
     # puts b.board
     
     [1,2,1,2,1,2].each_with_index do |column_id, i|
-      # puts "Move #{column_id}"
       b.move!(column_id)
-      # puts b.columns.inspect
       b2 = C4::Board.new b.board #re-serialize
-      # puts b2.columns.inspect
+      puts "Move in column #{column_id} at turn #{i}", b.columns.inspect, b2.columns.inspect
       assert_equal b.board, b2.board, "Serialized board does not match"
+      assert_equal b.columns, b2.columns, "@columns do not match"
       assert !b.has_winner?, "Should not have a winner yet"
       
     end
+    puts "final"
     b.move! 1
     assert b.has_winner?
     assert_equal C4::Board::A, b.winner

@@ -97,8 +97,10 @@ class C4::Board
       column_value = 0
       
       filled_rows.times do |i|
-        column_value |= (c[i] == B) ? 1 : 0# 1 if B
         column_value = column_value << 1 #move up one bit
+        #must not do above action on last iteration
+        
+        column_value |= (c[i] == B) ? 1 : 0# 1 if B
       end
       
       # puts "c: #{c.inspect}, filled_rows: #{filled_rows}, column_value: #{column_value}, b: #{@board}"
