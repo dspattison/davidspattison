@@ -121,7 +121,7 @@ class C4::Board
       
       column_value = 0
       
-      filled_rows.times do |i|
+      (filled_rows-1).downto(0) do |i|
         column_value = column_value << 1 #move up one bit
         #must not do above action on last iteration
         
