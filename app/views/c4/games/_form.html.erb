@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :player_a_email %><br />
+    <%= f.label "Opponent's email" %><br />
     <%= f.text_field :player_a_email %>
   </div>
   <div class="field">
-    <%= f.label :player_b_email %><br />
+    <%= f.label "Your email" %><br />
     <%= f.text_field :player_b_email %>
   </div>
   <div class="field">
-    <%= f.label :board %><br />
+    <p>Please select a cell to start the game</p>
     <%= render :partial=> 'board_form'%>
   </div>
   <div class="actions">
