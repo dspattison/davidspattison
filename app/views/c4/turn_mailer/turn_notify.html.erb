@@ -16,7 +16,7 @@
 			<% (0..6).each do |col_num|%>
 				<td class='c4-square'>
 					<%=h C4::Board::NAMES[@board.columns[col_num][row_num]]%>
-					<% if@board.columns[col_num][row_num] == C4::Board::EMPTY%> &nbsp; <%end%>
+					<% if @board.columns[col_num][row_num] == C4::Board::EMPTY%> &nbsp; <%end%>
 				</td>
 			<% end %>
 		</tr>
