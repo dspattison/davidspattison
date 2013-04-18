@@ -15,6 +15,12 @@ gem 'prototype-rails', '3.1.0'
 
 gem 'fb_graph', '2.5.8'
 
+gem 'execjs', '1.4.0'
+
+gem 'uglifier', '2.0.1'
+
+gem 'sass-rails', '3.1.7'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

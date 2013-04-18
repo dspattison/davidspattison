@@ -28,6 +28,9 @@ Davidspattison::Application.configure do
   #same as prod
   ActionMailer::Base.delivery_method = :smtp
   #more smtp settings are in smtp.rb
-  
+
+  #testing
+  # config.assets.digest = true
+
 end
 
