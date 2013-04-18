@@ -1,11 +1,11 @@
 
-<table class="c4-board-table" border=1>
+<table class="c4-board-table" border=1 style="width:100%;text-align:center">
 	<%5.downto(0).each do |row_num|%>
 		<tr>
 			<% (0..6).each do |col_num|%>
 				<td class='c4-square'>
 					<%=h C4::Board::NAMES[@board.columns[col_num][row_num]]%>
-					&nbsp; <!-- force a space -->
+					<% if @board.columns[col_num][row_num] == C4::Board::EMPTY%> &nbsp; <%end%>
 				</td>
 			<% end %>
 		</tr>
