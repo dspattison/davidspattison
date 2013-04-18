@@ -1,0 +1,29 @@
+
+<h1>Your Move against <%=h @other_player_name%></h1>
+<p>You are player <%= C4::Board::NAMES[@current_player]%></p>
+
+
+<table border="1" style="font-size:200%">
+	<thead>
+		<%(0..6).each do |i|%>
+			<th>
+				&nbsp;<%=link_to ("Move",c4_game_move_path(@c4_game,:only_path=>false,:column=>i),:style=>'text-decoration:none')%>&nbsp;
+			</th>
+		<%end%>
+	</thead>
+	<%5.downto(0).each do |row_num|%>
+		<tr style="text-align:center">
+			<% (0..6).each do |col_num|%>
+				<td class='c4-square'>
+					<%=h C4::Board::NAMES[@board.columns[col_num][row_num]]%>
+					&nbsp; <!-- force a space -->
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
+
+
+
+
+

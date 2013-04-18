@@ -1,4 +1,5 @@
 class C4::GamesController < ApplicationController
+  include C4::GamesHelper
   # GET /c4_games
   # GET /c4_games.json
   def index
@@ -44,14 +45,15 @@ class C4::GamesController < ApplicationController
   # POST /c4_games
   # POST /c4_games.json
   def create
+    #set board to zero
+    params[:c4_game][:board] = 0
     @c4_game = C4::Game.new(params[:c4_game])
     
-    @board = C4::Board.new 0
     #do first move
-    @board.move! params[:column].to_i
-    logger.debug "move! #{params[:column].inspect}, #{@board.columns}, #{@board.board}"
+    move! @c4_game, params[:column].to_i
     
-    @c4_game.board = @board.board
+    #logger.debug "move! #{params[:column].inspect}, #{@board.columns}, #{@board.board}"
+    
 
     respond_to do |format|
       if @c4_game.save
@@ -61,6 +63,19 @@ class C4::GamesController < ApplicationController
         format.html { render :action => "new" }
         format.json { render :json => @c4_game.errors, :status => :unprocessable_entity }
       end
+    end
+  end
+  
+  
+  # GET /c4/games/1/move?column=0
+  def move
+    puts params.inspect 
+    @c4_game = C4::Game.find(params[:game_id])
+    move! @c4_game, params[:column].to_i
+    @board = C4::Board.new @c4_game.board
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render :json => @c4_game }
     end
   end
 

@@ -1,7 +1,9 @@
 Davidspattison::Application.routes.draw do
   
   namespace :c4 do
-    resources :games
+    resources :games do
+      match 'move', :action => :move
+    end
   end
   
 

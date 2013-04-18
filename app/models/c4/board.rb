@@ -80,6 +80,18 @@ class C4::Board
     return @winner != nil
   end
   
+  def turn_number
+    turns = 0
+    
+    @columns.each do |col|
+      col.each do |cell|
+        turns += 1 if cell != EMPTY
+      end
+    end
+    
+    turns
+  end
+  
   def game_over?
     
   end
