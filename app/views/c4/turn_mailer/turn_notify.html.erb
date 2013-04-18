@@ -7,7 +7,7 @@
 	<thead>
 		<%(0..6).each do |i|%>
 			<th>
-				&nbsp;<%=link_to ("Move",c4_game_move_path(@c4_game,:only_path=>false,:column=>i),:style=>'text-decoration:none')%>&nbsp;
+				&nbsp;<%=link_to ("Move",c4_game_move_path(@c4_game,:only_path=>false,:column=>i, :sig=>get_move_hash(@c4_game, i)),:style=>'text-decoration:none')%>&nbsp;
 			</th>
 		<%end%>
 	</thead>

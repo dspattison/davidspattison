@@ -23,4 +23,11 @@ module C4::GamesHelper
     end
     
   end
+  
+  def get_move_hash c4_game, column
+    #so you could guess this if you had the source code... which is pushed to github
+    hasher = Hasher::Sha.new
+    board = C4::Board.new c4_game.board
+    hasher.hash :c4_move_hash, c4_game.id, board.turn_number, column 
+  end
 end

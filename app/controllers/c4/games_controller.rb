@@ -69,8 +69,14 @@ class C4::GamesController < ApplicationController
   
   # GET /c4/games/1/move?column=0
   def move
-    puts params.inspect 
     @c4_game = C4::Game.find(params[:game_id])
+    puts params.inspect, get_move_hash(@c4_game, params[:column].to_i) 
+    
+    #check sig
+    if params[:sig] != get_move_hash(@c4_game, params[:column].to_i)
+      raise Exception.new("Move hash is invalid; might have click the link twice")
+    end
+    
     move! @c4_game, params[:column].to_i
     @board = C4::Board.new @c4_game.board
     respond_to do |format|
