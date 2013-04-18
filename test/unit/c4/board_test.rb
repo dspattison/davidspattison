@@ -81,7 +81,7 @@ class C4::BoardTest < ActiveSupport::TestCase
     [1,2,1,2,1,2].each_with_index do |column_id, i|
       b.move!(column_id)
       b2 = C4::Board.new b.board #re-serialize
-      puts "Move in column #{column_id} at turn #{i}", b.columns.inspect, b2.columns.inspect
+      # puts "Move in column #{column_id} at turn #{i}", b.columns.inspect, b2.columns.inspect
       assert_equal b.board, b2.board, "Serialized board does not match"
       assert_equal b.columns, b2.columns, "@columns do not match"
       assert !b.has_winner?, "Should not have a winner yet"

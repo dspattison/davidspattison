@@ -34,16 +34,4 @@ class C4::GamesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update c4_game" do
-    put :update, :id => @c4_game.to_param, :c4_game => @c4_game.attributes
-    assert_redirected_to c4_game_path(assigns(:c4_game))
-  end
-
-  test "should destroy c4_game" do
-    assert_difference('C4::Game.count', -1) do
-      delete :destroy, :id => @c4_game.to_param
-    end
-
-    assert_redirected_to c4_games_path
-  end
 end
