@@ -15,7 +15,20 @@ class C4::Board
   A = 1
   B = 2
   
+  NAMES = {
+    EMPTY => "",
+    A => "A",
+    B => "B",
+  }
+  NAMES_HTML = {
+    EMPTY => "&nbsp;",
+    A => "A",
+    B => "B",
+  }
+  
+  
   VALID_CELLS = [EMPTY, A, B]
+  
   
   
   def initialize(board)

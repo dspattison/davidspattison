@@ -1,4 +1,8 @@
 /*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+ Place all the styles related to the matching controller here.
+ They will automatically be included in application.css.
+ */
+
+.c4-board-table th.c4-board-table {
+	padding: 10px;
+}
