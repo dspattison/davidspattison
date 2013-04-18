@@ -110,7 +110,7 @@ class C4::Board
       @board <<= 6
       @board |= (column_value & 63)
     end
-    @board <<= 3#need to pad for empty at end
+    @board <<= 1#need to pad for empty at end
     @board
   end
     
