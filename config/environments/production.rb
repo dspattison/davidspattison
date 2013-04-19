@@ -53,5 +53,6 @@ Davidspattison::Application.configure do
   #more smtp settings are in smtp.rb
   
   #use cloudfront cdn
-  config.action_controller.asset_host = "https://d1obd9rhc3zyju.cloudfront.net"
+  #config.action_controller.asset_host = "https://d1obd9rhc3zyju.cloudfront.net"
+  config.assets.digest = true
 end
