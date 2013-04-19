@@ -13,8 +13,9 @@ set :repository, 'git@github.com:dspattison/davidspattison.git'
 
 #set :deploy_via, :remote_cache #keep files locally and do an update
 
-role :web, 'ec2-72-44-35-251.compute-1.amazonaws.com'
-role :app, 'ec2-72-44-35-251.compute-1.amazonaws.com'
+#role :app, 'ec2-72-44-35-251.compute-1.amazonaws.com'
+
+role :app, 'ec2-54-224-191-57.compute-1.amazonaws.com'
 
 ssh_options[:user] = "ubuntu"
 
@@ -27,6 +28,7 @@ namespace :deploy do
     link_sqlite_db
     copy_configs
     render_keel
+    asset_compile
     migrate
     symlink
     restart
@@ -51,5 +53,9 @@ namespace :deploy do
   
   task :render_keel do 
     run "echo '<center>Updated on #{deploy_time} by #{deploy_user} #{`git ls-remote #{repository} HEAD|cut -b -40`.strip}</center> ' >> #{release_path}/app/views/shared/_keel.html.erb"
+  end
+  
+  task :asset_compile do
+    run "cd #{release_path} && rake assets:precompile"
   end
 end

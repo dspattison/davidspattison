@@ -51,4 +51,7 @@ Davidspattison::Application.configure do
   
   ActionMailer::Base.delivery_method = :smtp
   #more smtp settings are in smtp.rb
+  
+  #use cloudfront cdn
+  config.action_controller.asset_host = "https://d1obd9rhc3zyju.cloudfront.net"
 end

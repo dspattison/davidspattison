@@ -4,3 +4,4 @@ config/juggernaut.yml
 db/*sqlite3
 log/
 tmp/
+public/assets/*
