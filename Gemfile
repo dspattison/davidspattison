@@ -15,6 +15,12 @@ gem 'fb_graph', '2.5.8'
 
 gem 'execjs', '1.4.0'
 
+gem 'therubyracer', '0.11.4'
+
+gem 'libv8', '3.11.8.17'
+
+gem 'ref', '1.0.4'
+
 gem 'uglifier', '2.0.1'
 
 gem 'sass-rails', '3.1.7'
