@@ -9,4 +9,9 @@ class UrlshortTest < ActiveSupport::TestCase
       #puts x.code
     end
   end
+  
+  test "case sensitive" do
+    assert x = Urlshort.new({:target_url=>34423, :code=>'a'}).save
+    assert x = Urlshort.new({:target_url=>34423, :code=>'A'}).save
+  end
 end
