@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -23,7 +23,9 @@ gem 'ref', '1.0.4'
 
 gem 'uglifier', '2.0.1'
 
-gem 'sass-rails', '3.1.7'
+gem "sass-rails", "~> 3.2.6"
+
+gem 'mysql', '2.9.1'
 
 # Use unicorn as the web server
 # gem 'unicorn'
