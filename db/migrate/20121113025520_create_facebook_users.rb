@@ -1,6 +1,6 @@
 class CreateFacebookUsers < ActiveRecord::Migration
   def self.up
-    create_table :facebook_users do |t|
+    create_table :facebook_users, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin' do |t|
       t.integer :app_id, :null=>false
       t.integer :facebook_id, :null=>false
       t.string :auth, :null=>false

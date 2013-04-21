@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(:version => 20130401012612) do
 
-  create_table "c4_games", :force => true do |t|
+  create_table "c4_games", :force => true, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin' do |t|
     t.string   "player_a_email"
     t.string   "player_b_email"
     t.integer  "board"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20130401012612) do
     t.datetime "updated_at"
   end
 
-  create_table "facebook_users", :force => true do |t|
+  create_table "facebook_users", :force => true, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin' do |t|
     t.integer  "app_id",      :null => false
     t.integer  "facebook_id", :null => false
     t.string   "auth",        :null => false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130401012612) do
   add_index "facebook_users", ["email"], :name => "index_facebook_users_on_email"
   add_index "facebook_users", ["facebook_id", "app_id"], :name => "index_facebook_users_on_facebook_id_and_app_id", :unique => true
 
-  create_table "spaste_pastes", :force => true do |t|
+  create_table "spaste_pastes", :force => true, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin' do |t|
     t.text     "body"
     t.string   "title"
     t.string   "public_key"
@@ -46,14 +46,14 @@ ActiveRecord::Schema.define(:version => 20130401012612) do
 
   add_index "spaste_pastes", ["public_key"], :name => "index_spaste_pastes_on_public_key"
 
-  create_table "tte_games", :force => true do |t|
+  create_table "tte_games", :force => true, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin' do |t|
     t.string   "player_a_email"
     t.string   "player_b_email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tte_turns", :force => true do |t|
+  create_table "tte_turns", :force => true, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin' do |t|
     t.integer  "game_id"
     t.integer  "number"
     t.integer  "board"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20130401012612) do
     t.datetime "updated_at"
   end
 
-  create_table "urlshorts", :force => true do |t|
+  create_table "urlshorts", :force => true, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin' do |t|
     t.string   "target_url"
     t.string   "code"
     t.datetime "created_at"

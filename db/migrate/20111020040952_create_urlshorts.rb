@@ -1,6 +1,6 @@
 class CreateUrlshorts < ActiveRecord::Migration
   def self.up
-    create_table :urlshorts do |t|
+    create_table :urlshorts, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin' do |t|
       t.string :target_url
       t.string :code
 
