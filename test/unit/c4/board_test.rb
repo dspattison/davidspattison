@@ -66,12 +66,22 @@ class C4::BoardTest < ActiveSupport::TestCase
     assert_equal b.columns, b2.columns, "@columns do not match"
   end
   
-  test "compute simple winner" do
+  test "compute simple vertical winner" do
     b = C4::Board.new 18014398509481984
     # puts b.columns.inspect
-    assert b.has_winner?
-    assert_equal C4::Board::A, b.winner
+    assert b.has_winner?, "No winner"
+    assert_equal C4::Board::A, b.winner, "Wrong winner"
   end
+  
+  test "compute simple horizontal winner" do
+    b = C4::Board.new 17902028783616 
+    # puts b.board
+    # puts b.columns.inspect
+    assert b.has_winner?, "No winner"
+    assert_equal C4::Board::A, b.winner, "Wrong winner"
+  end
+  
+  
   
   test "moves" do
     b = C4::Board.new 0 #move in far left column
@@ -101,13 +111,61 @@ class C4::BoardTest < ActiveSupport::TestCase
   test "move in same column" do
     b = C4::Board.new 0
     (0..5).each do |i|
+      
+      
       b.move! 3
-      # puts i, b.columns.inspect, b.board
-      assert (i % 2 ? C4::Board::B : C4::Board::A), b.columns[3][i]
+      
+      
       
       assert C4::Board::A, b.columns[3][0]
     end
     
+  end
+  
+  test "horizontal winner 2" do
+    b = C4::Board.new 0
+    assert_moves_with_no_winner b, [4,4,3,4,2,4,2]
+    
+    assert_move_with_winner b, 4, C4::Board::B
+    
+  end
+  
+  test "/ winner" do
+    b = C4::Board.new 0
+    assert_moves_with_no_winner b, [0,1,1,2,2,3,2,3,3,5]
+    
+    # puts b.board, b.columns.inspect
+    assert_move_with_winner b, 3, C4::Board::A
+  end
+  
+  test "\ winner" do
+    b = C4::Board.new 0
+    assert_moves_with_no_winner b, [3,2,2,1,1,0,1,0,0,6]
+    
+    # puts b.board, b.columns.inspect
+    assert_move_with_winner b, 0, C4::Board::A
+  end
+  
+  #helper function to move the game along
+  def assert_moves_with_no_winner b, moves
+    moves.each_with_index do |column_id, i|
+      assert !b.has_winner?
+      turns_before = b.turn_number
+      
+      b.move! column_id
+      
+      assert !b.has_winner?, "There should not be a winner after move #{i}"
+      assert_equal turns_before+1, b.turn_number, "Turn number did not increment"
+    end
+  end
+  
+  def assert_move_with_winner b, column_id, winner
+    assert !b.has_winner?, "Board already has a winner"
+    
+    b.move! column_id
+    
+    assert b.has_winner?, "Board did not have a winner after move"
+    assert_equal winner, b.winner, "Wrong winner"
   end
   
 end
