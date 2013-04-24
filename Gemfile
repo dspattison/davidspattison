@@ -27,6 +27,8 @@ gem "sass-rails", "~> 3.2.6"
 
 gem 'mysql', '2.9.1'
 
+gem 'yaml_db'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
