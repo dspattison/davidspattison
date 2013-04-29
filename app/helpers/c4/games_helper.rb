@@ -28,6 +28,8 @@ module C4::GamesHelper
     #so you could guess this if you had the source code... which is pushed to github
     hasher = Hasher::Sha.new
     board = C4::Board.new c4_game.board
-    hasher.hash :c4_move_hash, c4_game.id, board.turn_number, column 
+    result = hasher.hash :c4_move_hash, c4_game.id, board.turn_number, column 
+    logger.info "hasing: #{[:c4_move_hash, c4_game.id, board.turn_number, column].inspect} to #{result.inspect}"
+    return result
   end
 end
