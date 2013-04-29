@@ -163,13 +163,68 @@ class C4::Board
   
   def compute_winner
     @winner = nil
-    #for now, just compute a complete column
-    @columns.each do |c|
-      if c[0] != EMPTY and c[0] == c[1] and c[0] == c[2] and c[0] == c[3]
-        # puts "winner: #{c[0]}"
-        @winner = c[0]
-        return
+    #vertical
+    (0..6).each do |start_col|
+      (0..2).each do |start_row|
+        # puts [@columns[start_col][start_row], @columns[start_col][start_row+1], @columns[start_col][start_row+2], @columns[start_col][start_row+3]].inspect,  set_has_winner?([@columns[start_col][start_row], @columns[start_col][start_row+1], @columns[start_col][start_row+2], @columns[start_col][start_row+3]]) if start_col==1 and start_row==0 
+        if set_has_winner? [@columns[start_col][start_row], @columns[start_col][start_row+1], @columns[start_col][start_row+2], @columns[start_col][start_row+3]]
+          @winner = @columns[start_col][start_row]
+          return 
+        end
       end
     end
+    
+    
+    #horizontal
+    (0..3).each do |start_col|
+      (0..5).each do |start_row|
+        test_cells = [@columns[start_col][start_row], @columns[start_col+1][start_row], @columns[start_col+2][start_row], @columns[start_col+3][start_row]]
+        # puts set_has_winner?(test_cells), test_cells.inspect if start_col == 2 and start_row==0
+        if set_has_winner? test_cells
+          # puts "found horinzotal winner at [#{start_col}-#{start_col+4}, #{start_row}]"
+          @winner = @columns[start_col][start_row] 
+          return
+        end
+      end
+    end
+    
+    # /
+    (0..3).each do |start_col|
+      (0..2).each do |start_row|
+        test_cells = [@columns[start_col][start_row], @columns[start_col+1][start_row+1], @columns[start_col+2][start_row+2], @columns[start_col+3][start_row+3]]
+        # puts set_has_winner?(test_cells), test_cells.inspect if start_col == 2 and start_row==0
+        if set_has_winner? test_cells
+          # puts "found / winner at [#{start_col}, #{start_row}]"
+          @winner = @columns[start_col][start_row] 
+          return
+        end
+      end
+    end
+    
+    # \
+    (0..3).each do |start_col|
+      (3..5).each do |start_row|
+        test_cells = [@columns[start_col][start_row], @columns[start_col+1][start_row-1], @columns[start_col+2][start_row-2], @columns[start_col+3][start_row-3]]
+        # puts set_has_winner?(test_cells), test_cells.inspect if start_col == 2 and start_row==0
+        if set_has_winner? test_cells
+          # puts "found \ winner at [#{start_col}, #{start_row}]"
+          @winner = @columns[start_col][start_row] 
+          return
+        end
+      end
+    end
+    
+    
+  end
+  
+  def set_has_winner? row
+    return false if row.empty?
+    return false if row[0] == EMPTY
+    
+    row.each do |i|
+      return false if row[0] != i #stop if one element does not match
+    end
+    return true
+    
   end
 end
