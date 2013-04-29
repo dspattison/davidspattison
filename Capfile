@@ -15,7 +15,8 @@ set :repository, 'git@github.com:dspattison/davidspattison.git'
 
 #role :app, 'ec2-72-44-35-251.compute-1.amazonaws.com'
 
-role :app, 'ec2-54-224-191-57.compute-1.amazonaws.com'
+#role :app, 'ec2-54-224-191-57.compute-1.amazonaws.com'
+role :app, 'ec2-174-129-53-208.compute-1.amazonaws.com'
 
 ssh_options[:user] = "ubuntu"
 
@@ -49,6 +50,7 @@ namespace :deploy do
   desc "Copys config files from the shared folder into the config folder"
   task :copy_configs do
     run "cp #{shared_path}/config/juggernaut.yml #{current_release}/config/juggernaut.yml"
+    run "cp #{shared_path}/config/database.yml #{current_release}/config/database.yml"
   end
   
   task :render_keel do 
