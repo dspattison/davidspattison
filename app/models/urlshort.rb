@@ -7,6 +7,13 @@ class Urlshort < ActiveRecord::Base
     record.errors.add(attr, "Must be different from the url") if value == record.send(:target_url)
   end
   
+  #checks that target_url looks like a url
+  validates_format_of :target_url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/ix
+  
+  #when null/empty we will populate it
+  validates_format_of :code, :with => /^[a-zA-Z0-9]*$/
+  
+  
   validate :next_code
   
   def get_short_url

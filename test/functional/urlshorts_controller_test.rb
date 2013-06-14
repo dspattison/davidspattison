@@ -12,7 +12,7 @@ class UrlshortsControllerTest < ActionController::TestCase
 
   test "should create urlshort" do
     assert_difference('Urlshort.count') do
-      post :create, :urlshort => {:target_url =>:foobar}
+      post :create, :urlshort => {:target_url => "http://a.com"}
     end
 
     assert_redirected_to urlshort_path(assigns(:urlshort))

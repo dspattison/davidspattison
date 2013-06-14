@@ -12,14 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :target_url %><br />
-    <%= f.text_field :target_url %>
+    <%= f.label :target_url, "URL" %><br />
+    <%= f.text_field :target_url, :class=>:bigger, :type=>:url %>
   </div>
   <div class="field">
     <%= f.label :code %> Ok to leave blank.<br />
+    <span style="float:left">https://patt.us/u/</span>
     <%= f.text_field :code %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Shorten", :class=>'button-clickme' %>
   </div>
 <% end %>
