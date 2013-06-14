@@ -4,5 +4,9 @@ class RootController < ApplicationController
     response.headers["Strict-Transport-Security"] =  "max-age=2592000; includeSubDomains"
     @urlshort = Urlshort.new
   end
+  
+  def tos
+    #place holder for the legal page
+  end
 
 end
