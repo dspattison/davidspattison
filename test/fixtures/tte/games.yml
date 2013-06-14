@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  player_a_email: MyString
-  player_b_email: MyString
+  player_a_email: a@patt.us
+  player_b_email: b@patt.us
 
 two:
-  player_a_email: MyString
-  player_b_email: MyString
+  player_a_email: a@patt.us
+  player_b_email: b@patt.us
   
 #http://localhost:3000/tte/games/3/move?tte_game%5Bplayer%5D=1&tte_game%5Bsquare%5D=8&tte_game[sig]=lwFb1tI4ajs60DWn6R4AGXmAPUd
 tie:
@@ -23,5 +23,5 @@ win:
 
 game_over_tie:
   id: 5
-  player_a_email: MyString
-  player_b_email: MyString
+  player_a_email: dspattison+o@gmail.com
+  player_b_email: dspattison+x@gmail.com

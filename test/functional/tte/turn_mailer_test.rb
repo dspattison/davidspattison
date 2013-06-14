@@ -9,12 +9,10 @@ class Tte::TurnMailerTest < ActionMailer::TestCase
     assert !ActionMailer::Base.deliveries.empty?
     
     
-    assert_equal [tte_game.player_a_email], email.to
+    assert_equal [tte_game.player_b_email], email.to
     
-    assert_equal "[tic-tac-email] Your Move against MyString", email.subject
+    assert_equal "[tic-tac-email] Your Move against #{tte_game.player_a_email}", email.subject
     
-    
-    assert_match(/#{tte_game.player_b_email}/, email.encoded)
     
   end
   

@@ -48,8 +48,8 @@ class Tte::GamesController < ApplicationController
     @board = Tte::Board.new 0
     
     success = true
-    @tte_game.save! or success = false
     begin
+      @tte_game.save! or success = false
       success and perform_move @tte_game, nil, params[:square].to_i, Tte::Board::TILE_X
     rescue Exception=>ex
       logger.error ex.inspect
