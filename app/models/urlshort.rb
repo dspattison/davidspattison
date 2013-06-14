@@ -3,6 +3,10 @@ class Urlshort < ActiveRecord::Base
             
   #validates_uniqueness_of :target_url
   
+  validates_each :code do |record, attr, value|
+    record.errors.add(attr, "Must be different from the url") if value == record.send(:target_url)
+  end
+  
   validate :next_code
   
   def get_short_url
