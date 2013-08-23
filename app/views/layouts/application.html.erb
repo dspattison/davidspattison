@@ -15,12 +15,14 @@
 <%= yield %>
 
 <hr/>
-<%= render :partial=> 'shared/keel' %>
-<center>
-	<%= link_to "Home", :root%>
-	<a href="https://github.com/dspattison/davidspattison/issues">Bugs</a>
-	<%= link_to "Tos", :tos%>
-</center>
+<div id="keel">
+	<%= render :partial=> 'shared/keel' %>
+	<center>
+		<%= link_to "Home", :root%>
+		<a href="https://github.com/dspattison/davidspattison/issues">Bugs</a>
+		<%= link_to "Tos", :tos%>
+	</center>
+</div>
 
 <%= render :partial => 'tracking/google_analytics' %>
 
