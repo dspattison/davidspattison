@@ -6,8 +6,8 @@
 		<p>Thanks for visiting my site.</p>
 		<p>Here are some things I have built on this web scratchpad.</p>
 		<dl>
-			<dt><%= link_to "Tic-Tac-Email!", tte_games_path %></dt>
-			<dd><%=link_to(image_tag('tte-game-won.svg', :style=>"float:left", :height=>'100', :width=>'100'), tte_games_path) %></dd>
+			<dt id="linkid-dt"><%= link_to "Tic-Tac-Email!", tte_games_path %></dt>
+			<dd id='linkid-dd'><%=link_to(image_tag('tte-game-won.svg', :style=>"float:left", :height=>'100', :width=>'100'), tte_games_path) %></dd>
 			<dd>First game for patt.us!</dd>
 			<dd>Turn based, two player, simple board game</dd>
 			<dd>Notifies each player via Email</dd>
