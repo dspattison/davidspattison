@@ -8,7 +8,9 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-40646320-1');
+  ga('create', 'UA-40646320-1', {allowLinker: true});
+  ga('require', 'linker');
+  ga('linker:autoLink', ['patt.us', 'tic-tac-toe.us']);
   ga('require', 'linkid', 'linkid.js');
   ga('send', 'pageview');
 
