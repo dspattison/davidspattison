@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0'" />
 </head>
 <body>
+<%= render :partial => 'tracking/google_analytics' %>
 <% if !@page_html_title.empty? %>
 <h1><%=@page_html_title%></h1>
 <% end %>
@@ -24,7 +25,6 @@
 	</center>
 </div>
 
-<%= render :partial => 'tracking/google_analytics' %>
 
 </body>
 </html>
