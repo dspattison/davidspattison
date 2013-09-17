@@ -14,8 +14,14 @@
   ga('require', 'linker');
   ga('linker:autoLink', ['patt.us', 'tic-tac-toe.us']);
   ga('require', 'linkid', 'linkid.js');
-  ga('require', 'displayfeatures');
+
+  // Create the google account, named "google".
+  ga('create', 'UA-44118707-1', {name: 'google'})
+  ga('google.require', 'displayfeatures');
+
+  // Send all.
   ga('send', 'pageview');
+  ga('google.send', 'pageview');
 
 </script>
 
