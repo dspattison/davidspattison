@@ -64,4 +64,15 @@ module Tte::GamesHelper
     hasher.hash :tte_move_hash, game_id, email, square_id, last_board
   end
   
+  
+  def get_pixel email
+    t = Email::Analytics::Tracker.new 'UA-40646320-1'
+    t.set :cid, Email::Analytics::get_visitor_id(email)
+    t.set :t, :event
+    t.set :ec, 'email' # category
+    t.set :ea, 'open' # action
+    t.set :el, 'label' # label
+    t.send
+  end
+  
 end
