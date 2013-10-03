@@ -1,7 +1,5 @@
 <%
- # Account is on dspattison@gmail.com
- #script = '//www.google-analytics.com/analytics.js'
- script = '/analytics.js'
+ script = 'https://www.google-analytics.com/analytics.js'
 %>
 
 <script>
@@ -11,12 +9,14 @@
   })(window,document,'script','<%=h script %>','ga');
 
   ga('create', 'UA-40646320-1', {allowLinker: true});
+  ga('set', 'forceSSL', true);
   ga('require', 'linker');
   ga('linker:autoLink', ['patt.us', 'tic-tac-toe.us']);
   ga('require', 'linkid', 'linkid.js');
 
   // Create the google account, named "google".
-  ga('create', 'UA-44118707-1', {name: 'google'})
+  ga('create', 'UA-44118707-1', {name: 'google'});
+  ga('google.set', 'forceSSL', true);
   ga('google.require', 'displayfeatures');
 
   // Send all.
@@ -24,6 +24,3 @@
   ga('google.send', 'pageview');
 
 </script>
-
-
-
