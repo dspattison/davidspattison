@@ -8,5 +8,9 @@ class RootController < ApplicationController
   def tos
     #place holder for the legal page
   end
+  
+  def search
+    # google custom search page
+  end
 
 end
