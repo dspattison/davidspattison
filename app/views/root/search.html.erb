@@ -1,4 +1,12 @@
 <script>
+// Patching GA~>UA.
+_gaq = {};
+_gaq.push = function() {
+  ga('send', 'pageview', arguments[0][1]);
+};
+</script>
+
+<script>
   (function() {
     var cx = '013826892924809587241:tm2fdeo_pug';
     var gcse = document.createElement('script');
