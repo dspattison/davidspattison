@@ -27,21 +27,35 @@
 
 <script>
 (function(){
-	var cancel = false;
-	var send20SecEvent = function() {
-	  if (cancel) return;
-	  ga('google.send', 'event', 'timeonpage', '20'); // or _gaq/dataLayer
+	var DwellEventTimer = function(seconds, target) {
+		this.target = target;
+		this.seconds = seconds;
+		this.ticks = 0;
+		var TICKS_INTERVAL_ = 1000;
+		this.valid = document.hidden;
+		window.setInterval(this.intervalHandler_.bind(this), TICKS_INTERVAL_);
 	};
-	var visibilityChangeHandler = function(e) {
-	  if (document.visibilityState == 'prerender') {
-	    return;
-	  }
-	  if (document.hidden) {
-	    cancel = true;
-	  }
+
+	DwellEventTimer.prototype.intervalHandler_ = function() {
+		if (!this.target) {
+			return;
+		}
+		if (document.hidden) {
+			return;
+		}
+		this.ticks += 1;
+		if (this.ticks >= this.seconds) {
+			this.target();
+			this.target = null; // Disable.
+		}
 	};
-	window.setTimeout(send20SecEvent, 20*1000);
-	document.addEventListener("visibilitychange", visibilityChangeHandler, false);
+	
+	new DwellEventTimer(20, function() {
+		ga('google.send', 'event', 'timeonpage', '20'); // or _gaq/dataLayer
+	});
+	new DwellEventTimer(60, function() {
+		ga('google.send', 'event', 'timeonpage', '60'); // or _gaq/dataLayer
+	});
 })();
 </script>
 
