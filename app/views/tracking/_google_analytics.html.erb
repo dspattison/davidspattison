@@ -25,6 +25,26 @@
 
 </script>
 
+<script>
+(function(){
+	var cancel = false;
+	var send20SecEvent = function() {
+	  if (cancel) return;
+	  ga('google.send', 'event', 'timeonpage', '20'); // or _gaq/dataLayer
+	};
+	var visibilityChangeHandler = function(e) {
+	  if (document.visibilityState == 'prerender') {
+	    return;
+	  }
+	  if (document.hidden) {
+	    cancel = true;
+	  }
+	};
+	window.setTimeout(send20SecEvent, 20*1000);
+	document.addEventListener("visibilitychange", visibilityChangeHandler, false);
+})();
+</script>
+
 <!-- Google Tag Manager -->
 <noscript>
   <iframe src="//www.googletagmanager.com/ns.html?id=GTM-MRMJBK"
