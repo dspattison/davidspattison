@@ -31,15 +31,21 @@
 		this.target = target;
 		this.seconds = seconds;
 		this.ticks = 0;
-		var TICKS_INTERVAL_ = 1000;
-		this.valid = document.hidden;
-		window.setInterval(this.intervalHandler_.bind(this), TICKS_INTERVAL_);
+		this.TICKS_INTERVAL_ = 1000; // Each tick is 1 second long.
+		window.setInterval(this.intervalHandler_.bind(this), this.TICKS_INTERVAL_);
 	};
 
 	DwellEventTimer.prototype.intervalHandler_ = function() {
 		if (!this.target) {
 			return;
 		}
+
+		// document.hidden will be undefined (falsey) on browsers that don't support
+		// the visibility api.  It will just wait this.seconds and fire.
+		// If page is hidden this tick will not count.  It will resume counting
+		// once the page is visible.  We could use the visibility api to know exactly
+		// when the page was hidden and start/resume the timer then.  This is a similar
+		// approach.
 		if (document.hidden) {
 			return;
 		}
@@ -49,12 +55,18 @@
 			this.target = null; // Disable.
 		}
 	};
-	
+
 	new DwellEventTimer(20, function() {
 		ga('google.send', 'event', 'timeonpage', '20'); // or _gaq/dataLayer
 	});
 	new DwellEventTimer(60, function() {
 		ga('google.send', 'event', 'timeonpage', '60'); // or _gaq/dataLayer
+	});
+	
+	// Set one to randomly sample between 1 and 60;
+	var secs = Math.floor(Math.random() * 60);
+	new DwellEventTimer(secs, function() {
+		ga('google.send', 'event', 'timeonpage', 'random', '', secs);
 	});
 })();
 </script>
