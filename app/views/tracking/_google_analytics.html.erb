@@ -1,6 +1,6 @@
 <%
- script = 'https://www.google-analytics.com/analytics.js'
- #script = '/analytics.js'
+ #script = 'https://www.google-analytics.com/analytics.js'
+ script = '/analytics.js'
  ga_js = 'https://www.google-analytics.com/u/ga_beta.js'
 %>
 
@@ -20,7 +20,9 @@
   // Create the google account, named "google".
   ga('create', 'UA-44118707-1', 'auto', {name: 'google'});
   ga('google.set', 'forceSSL', true);
-  ga('google.require', 'displayfeatures');
+  //ga('google.require', 'displayfeatures');
+  ga('google.set', '_dfr', true);
+  ga('google.set', 'transportUrl', 'https://google-analytics.com/r/collect');
 
   // Send all.
   ga('send', 'pageview');
