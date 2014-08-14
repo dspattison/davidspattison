@@ -1,7 +1,6 @@
 <%
- #script = 'https://www.google-analytics.com/analytics.js'
- script = '/analytics.js'
- ga_js = 'https://www.google-analytics.com/u/ga_beta.js'
+ script = 'https://www.google-analytics.com/analytics.js'
+ #script = '/analytics.js'
 %>
 
 <script>
@@ -107,10 +106,4 @@
 </script>
 <!-- End Google Tag Manager -->
 
-<script async src="<%=h ga_js %>"></script>
-<script>
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-44118707-2']);
-	_gaq.push(['_trackPageview']);
-</script>
-
+<%# ga.js is now in gtm %>
