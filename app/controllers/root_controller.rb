@@ -1,7 +1,7 @@
 class RootController < ApplicationController
   def index
-    #set STS for 1 month
-    response.headers["Strict-Transport-Security"] =  "max-age=2592000; includeSubDomains"
+    #set STS for 18 weeks, preload
+    response.headers["Strict-Transport-Security"] =  "max-age=10886400; includeSubDomains; preload"
     @urlshort = Urlshort.new
   end
   
